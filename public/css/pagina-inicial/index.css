@@ -199,8 +199,8 @@ main{
 
 footer{
     width: 100%;
-    min-height: 100px;
-    height: calc(min-height - max-content);
+    max-height: 172px;
+    height: 120px;
     display: flex;
     justify-content: center;
     align-items:flex-end;
