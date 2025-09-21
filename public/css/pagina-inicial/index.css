@@ -102,8 +102,13 @@ header img{
     align-items: center;
 }
 
+.items-bar a:hover{
+    color: white;
+    
+}
+
 main{
     width: 100%;
-    height: 600px;
+    height: 500px;
     background-color: #ee8413;
 }
