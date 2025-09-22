@@ -124,9 +124,9 @@
 
         <div class="user-area">
         
-            <img src="public/images/default-user.jpg" alt="">
+            <a href="pages/login-page.php"><img src="public/images/default-user.jpg" alt=""></a>
 
-            <a style="font-weight:700;" href="#">Olá, Usuário!</a>
+            <a style="font-weight:700;" href="pages/login-page.php">Faça Login</a>
 
 
         </div>
