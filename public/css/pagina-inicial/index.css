@@ -77,8 +77,9 @@ header img{
 .search-bar button{
     height: 30px;
     border-radius: 5px;
-    background-color: #ee8413;
-    box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.14);
+    color: white;
+    background-color: #043a5c;
+    box-shadow: 3px 1px 10px rgba(0, 0, 0, 0.14);
     border: 2px solid rgba(0, 0, 0, 0.197);
 }
 
@@ -154,7 +155,7 @@ header img{
 }
 
 .box-item ul a:hover{
-    background-color: #b15c00;
+    background-color: #043a5c;
     transition: 1s;
 }
 
