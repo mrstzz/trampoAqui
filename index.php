@@ -11,6 +11,9 @@
 </head>
 <body>
     <header>
+        <img class="menu-bar" src="public/images/menu-bar.png" alt="">
+
+
         <img src="public/images/logo-trampo-aqui.png" alt="">
     
         <div class="navigation-bar">
@@ -121,6 +124,8 @@
 
             
         </div>
+
+        <img class="search-icon" src="public/images/search-bar.png" alt="">
 
         <div class="user-area">
         
