@@ -1,12 +1,15 @@
 *{
     margin: 0;
     padding:0;
+    font-family: 'Poppins';
+    font-size: 13px;
 }
 
 body{
     height: 100vh;
     width: 100vw;
     display: flex;
+    background-color: whitesmoke;
 }
 
 .left-head{
@@ -31,32 +34,100 @@ body{
 }
 
 .right-head form{
+    background-color: white;
+    width: 900px;
+    height: 545px;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    border: solid 1px rgba(0, 0, 0, 0.068);
+    box-shadow: 3px 1px 10px rgba(0, 0, 0, 0.14);
+    border-radius: 10px;
+
+}
+
+@media(max-width: 950px){
+    .right-head form{
+        max-width: 425px;
+    }
+}
+
+.right-head form a{
+    text-decoration: none;
+}
+
+.right-head form a:hover{
+    cursor: pointer;
+    color: #ee8413;
+    transition: 1s;
+}
+
+.right-head form input[type="text"],input[type="password"]{
+    width: 250px;
+    height: 30px;
+}
+
+.check-senha{
+    display: flex;
+    gap: 5px;
+}
+
+.right-head form button{
+    width: 250px;
+    height: 30px;
+    border-radius: 5px;
+    color: white;
+    background-color: #043a5c;
+    box-shadow: 3px 1px 10px rgba(0, 0, 0, 0.14);
+    border: 2px solid rgba(0, 0, 0, 0.197);
+}
+
+.right-head form button:hover{
+    background-color: #ee8413;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.checkbox-input{
+    height: auto;
+    width: auto;
+    display: flex;
+    cursor: pointer;
 }
 
 @media(max-width: 528px){
 
     body{
-    height: 100vh;
-    width: 100vw;
+    height: auto;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
+    margin-bottom: 150px;
 }
 
     .left-head{
         height: 20%;
         width: 100%;
-        position: absolute;
+        position: fixed;
         bottom: 0;
     }
 
     .right-head{
         display: flex;
         justify-content: center;
+        align-items: center;
+        
+    }
 
+    .right-head form{
+        height: 450px;
+        width: 450px;
+        position: absolute;
+        top: 20px;
     }
 
 

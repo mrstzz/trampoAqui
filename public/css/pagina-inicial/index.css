@@ -191,6 +191,14 @@ header img{
     color: black;
 }
 
+.menu-bar{
+    display: none;
+}
+
+.search-icon{
+    display: none;
+}
+
 
 main{
     width: 100vw;
@@ -207,3 +215,54 @@ footer{
     align-items:flex-end;
 }
 
+@media(max-width: 528px){
+
+
+    header{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .menu-bar{
+        width: 50px;
+        height: 40px;
+        display: flex;
+    }
+
+    
+
+    .menu-bar:hover{
+        cursor: pointer;
+    }
+
+    .menu-bar:active .box-item{
+        display:flex;
+        transition: 1s;
+
+    }
+
+    .search-icon{
+        width: 30px;
+        height: auto;
+        display: flex;
+}
+
+.search-icon:hover{
+        cursor: pointer;
+}
+
+    .navigation-bar{
+        display: none;
+    }
+
+.search-bar {
+    display: none;
+}
+
+
+.item{
+    display: none;
+}
+
+}
