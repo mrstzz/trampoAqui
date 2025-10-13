@@ -36,7 +36,7 @@
             </div>
             <button type="submit">Entrar</button>
             
-            <a href="">Criar uma Conta</a>
+            <a href="signup-page.php">Criar uma Conta</a>
         </form>
 
 
