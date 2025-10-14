@@ -14,7 +14,7 @@
 <body>
 
     <div class="signup-box">
-        <form class="sign-left-head">
+        <form class="sign-left-head" action="" method="post" >
             <img src="../public/images/logo-trampo-aqui.png" alt="">
 
             <div class="name-box">
@@ -25,19 +25,23 @@
 
                 <div class="name-input-box">
                     <p>Sobrenome</p>
-                    <input type="text" name="nome" placeholder="Sobrenome...">
+                    <input type="text" name="sobrenome" placeholder="Sobrenome...">
                 </div>
 
             </div>
 
             <div class="input-box">
                 <p>Email</p>
-                <input type="text" name="nome" placeholder="Email...">
+                <input type="text" name="email" placeholder="Email...">
             </div>
 
             <div class="input-box">
                 <p>CPF</p>
-                <input type="text" name="nome" placeholder="CPF...">
+                <input type="text" name="cpf" placeholder="CPF...">
+            </div>
+            <div class="input-box">
+                <p>Telefone</p>
+                <input type="phone" name="phone" placeholder="Telefone...">
             </div>
 
             <div class="name-box">
@@ -76,7 +80,7 @@
                 </div>
                 <div class="name-input-box">
                     <p>Cidade</p>
-                    <input type="text" name="nome" placeholder="Digite sua cidade...">
+                    <input type="text" name="cidade" placeholder="Digite sua cidade...">
                 </div>
 
 
@@ -85,17 +89,17 @@
             <div class="name-box">
                 <div class="name-input-box">
                     <p>Senha</p>
-                    <input type="password" name="nome" placeholder="Digite uma senha...">
+                    <input type="password" name="senha" placeholder="Digite uma senha...">
                 </div>
 
                 <div class="name-input-box">
                     <p>Confirme sua senha</p>
-                    <input type="password" name="nome" placeholder="Confirme sua senha...">
+                    <input type="password" name="confirma-senha" placeholder="Confirme sua senha...">
                 </div>
             </div>
 
             <div class="name-box">
-                <input type="checkbox" name="" id="">
+                <input type="checkbox" name="terms" id="">
                 <p>Eu concordo com os termos de <a href="privacidade.php">privacidade</a> do trampoAqui.</p>
             </div>
 
@@ -108,22 +112,22 @@
 
             <div class="termos-privacidade">
                 <p>
-                    Termos de Privacidade - TrampoAqui &copy 2025
+                    Termos de Privacidade - TrampoAqui
                 </p>
-
+                <br>
                 <p>
-                    1. Introdução
+                    1. Introdução <br><br>
 
-                    Bem-vindo(a) ao TrampoAqui!
+                    Bem-vindo(a) ao TrampoAqui!<br><br>
                     Estes Termos de Privacidade explicam como coletamos, utilizamos e protegemos as informações pessoais
                     dos usuários que se cadastram e utilizam nossos serviços. Ao se cadastrar no site trampoaqui.com,
                     você concorda com as condições descritas neste documento.
 
                     Nosso compromisso é garantir a transparência, a segurança e o uso responsável dos seus dados.
                 </p>
-
+                <br>
                 <p>
-                    2. Informações que Coletamos
+                    2. Informações que Coletamos<br><br>
 
                     Ao criar uma conta no TrampoAqui, podemos solicitar as seguintes informações:
 
@@ -138,9 +142,9 @@
                     Cookies e dados de navegação: coletados para melhorar a experiência do usuário e personalizar
                     recomendações.
                 </p>
-
+                <br>
                 <p>
-                    3. Como Usamos suas Informações
+                    3. Como Usamos suas Informações<br><br>
 
                     Os dados coletados têm como finalidade:
 
@@ -156,9 +160,9 @@
 
                     Enviar notificações sobre atividades, atualizações e novidades da plataforma.
                 </p>
-
+                <br>
                 <p>
-                    4. Compartilhamento de Informações
+                    4. Compartilhamento de Informações<br><br>
 
                     O TrampoAqui não vende, aluga nem compartilha seus dados pessoais com terceiros para fins
                     comerciais.
@@ -170,18 +174,18 @@
 
                     Autoridades legais, quando houver obrigação prevista em lei ou ordem judicial.
                 </p>
-
+                <br>
                 <p>
-                    5. Segurança dos Dados
+                    5. Segurança dos Dados<br><br>
 
                     Adotamos medidas de segurança técnicas e administrativas para proteger suas informações contra
                     acessos não autorizados, perda ou alteração.
                     No entanto, lembramos que nenhum sistema é 100% seguro, e recomendamos que o usuário mantenha sua
                     senha em sigilo e evite compartilhá-la.
                 </p>
-
+                <br>
                 <p>
-                    6. Direitos do Usuário (LGPD)
+                    6. Direitos do Usuário (LGPD)<br><br>
 
                     De acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você tem o direito de:
 
@@ -196,38 +200,43 @@
                     Essas solicitações podem ser feitas entrando em contato pelo e-mail: privacidade@trampoaqui.com
                     .
                 </p>
-
+                <br>
                 <p>
-                    7. Retenção e Exclusão de Dados
+                    7. Retenção e Exclusão de Dados<br><br>
 
                     Os dados pessoais serão mantidos enquanto sua conta estiver ativa. Caso você solicite a exclusão da
                     conta, os dados serão removidos definitivamente, salvo quando houver obrigação legal de mantê-los
                     por tempo determinado.
                 </p>
-
+                <br>
                 <p>
-                    8. Uso de Cookies
+                    8. Uso de Cookies<br><br>
 
                     Utilizamos cookies para aprimorar o desempenho do site e personalizar sua experiência.
                     Você pode desativar os cookies nas configurações do navegador, mas isso pode limitar algumas
                     funcionalidades
                     da plataforma.
                 </p>
+                <br>
                 <p>
-                    9. Alterações Nesta Política
+                    9. Alterações Nesta Política<br><br>
 
                     O TrampoAqui poderá atualizar este documento periodicamente.
                     Sempre que ocorrerem mudanças relevantes, notificaremos os usuários por e-mail ou pelo próprio site.
                 </p>
+                <br>
 
                 <p>
-                    10. Contato
+                    10. Contato<br><br>
 
                     Se você tiver dúvidas sobre esta política ou sobre o uso dos seus dados pessoais, entre em contato
                     conosco:
+                    <br><br>
                     📩 privacidade@trampoaqui.com
-
+                    <br>
                     🌐 trampoaqui.com
+                    <br><br>
+                    &copy 2025 - TrampoAqui - Todos os direitos reservados
                 </p>
             </div>
 
