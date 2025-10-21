@@ -57,7 +57,7 @@ class Cliente extends Conexao{
 
         $sql = "SELECT * FROM clientes WHERE ";
 
-        $codigo = ($codigo) ? $sql .= "codigo = $codigo" : $sql.="nome = $nome";
+        $codigo = ($codigo) ? $sql .= "codigo = '$codigo'" : $sql.="nome = '$nome'";
 		$res = $this->Consulta($sql);
 		
 		if ($res->rowCount() === 0) {
