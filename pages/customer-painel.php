@@ -41,7 +41,7 @@
 
             <a href="pages/login-page.php"><img src="../public/images/default-user.jpg" alt=""></a>
 
-            <a style="font-weight:700;" href="pages/login-page.php">Olá, [Usuario]</a>
+            <a style="font-weight:400; color:white;" href="pages/login-page.php">Olá, [Usuario]</a>
 
 
         </div>
@@ -52,30 +52,38 @@
 
         <div class="post-box">
 
+            <div class="client-data-info">
+
+                <a href="pages/login-page.php"><img class="user-img" src="../public/images/default-user.jpg" alt=""></a>
+
+                <p style="margin-left:30px; font-size: 15px; font-weight: 700;">João Cardoso Lima</p>
+                <p style="margin-left:10px;">(Pedreiro Experiente, 22 anos)</p>
+
+                <p style="position:absolute; right: 10px;">Nivel: 5 (Intermediario)</p>
+            </div>
+
+
+            <div class="img-post-box">
+
+            </div>
+
+
+
+
+
         </div>
 
-        <div class="post-box">
-
-        </div>
-
-        <div class="post-box">
-
-        </div>
-
-        <div class="post-box">
-
-        </div>
-
-        <div class="post-box">
-
-        </div>
         
+
+
+        <div style="height: 20px;"></div>
+
+        
+        <footer></footer>
+
 
     </div>
 
-    <footer>
-dsadsa
-    </footer>
 
 </body>
 
