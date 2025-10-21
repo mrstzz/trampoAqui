@@ -14,18 +14,13 @@
 <body>
 
     <div class="signup-box">
-        <form class="sign-left-head" action="" method="post" >
+        <form class="sign-left-head" action="../Classes//Usuario/create" method="POSY" >
             <img src="../public/images/logo-trampo-aqui.png" alt="">
 
             <div class="name-box">
                 <div class="name-input-box">
-                    <p>Nome</p>
-                    <input type="text" name="nome" placeholder="Nome...">
-                </div>
-
-                <div class="name-input-box">
-                    <p>Sobrenome</p>
-                    <input type="text" name="sobrenome" placeholder="Sobrenome...">
+                    <p>Nome Completo</p>
+                    <input type="text" name="nome" placeholder="João Silva">
                 </div>
 
             </div>
@@ -41,7 +36,7 @@
             </div>
             <div class="input-box">
                 <p>Telefone</p>
-                <input type="phone" name="phone" placeholder="Telefone...">
+                <input type="phone" name="telefone" placeholder="Telefone...">
             </div>
 
             <div class="name-box">
@@ -104,8 +99,6 @@
             </div>
 
             <button type="submit">Finalizar Cadastro</button>
-
-
         </form>
 
         <div class="sign-right-head">
