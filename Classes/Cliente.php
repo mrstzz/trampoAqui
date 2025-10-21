@@ -55,7 +55,7 @@ class Cliente extends Conexao{
 
     function pesquisaCliente ($codigo = FALSE, $nome = FALSE){
 
-        $sql = "SELECT * FROM clientes WHERE";
+        $sql = "SELECT * FROM clientes WHERE ";
 
         $codigo = ($codigo) ? $sql .= "codigo = $codigo" : $sql.="nome = $nome";
 		$res = $this->Consulta($sql);
