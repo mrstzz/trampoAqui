@@ -11,18 +11,18 @@
     <div class="left-head"></div>
     <div class="right-head">
 
-        <form class="cadastro-box" action="" method="post">
+        <form class="cadastro-box" action="../Classes/Usuario.php?acao=loginSubmit" method="POST">
 
             <img src="../public/images/logo-trampo-aqui.png" alt="">
             
             <div class="input-box">
                 <p>Email</p>
-                <input type="text" placeholder="Entre com seu usuário...">
+                <input type="text" name="email" placeholder="Entre com seu usuário...">
             </div>
 
             <div class="input-box">
                 <p>Senha</p>
-                <input type="password" name="" id="" placeholder="Digite sua senha...">
+                <input type="password" name="senha" id="senha" placeholder="Digite sua senha...">
             </div>
 
             <div class="check-senha">
