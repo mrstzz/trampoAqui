@@ -1,4 +1,5 @@
 <?php
+include_once "../Classes/Conexao.php";
 
 
 class Cliente extends Conexao{
@@ -10,14 +11,15 @@ class Cliente extends Conexao{
     var $cpf;
     var $criado_em;
 
-    function __construct($nome,$senha,$telefone,$cpf,$criado_em) {
+
+     function __construct($nome = "", $email = "", $senha = "", $telefone = "", $cpf = "", $criado_em = null) {
         $this->nome = $nome;
+        $this->email = $email;
         $this->senha = $senha;
         $this->telefone = $telefone;
         $this->cpf = $cpf;
-        $this->$criado_em = $criado_em;
-    }
-
+        $this->criado_em = $criado_em;
+     }
 
     function insereCliente(){
 
@@ -57,8 +59,12 @@ class Cliente extends Conexao{
 
         $sql = "SELECT * FROM clientes WHERE ";
 
-        $codigo = ($codigo) ? $sql .= "codigo = $codigo" : $sql.="nome LIKE '$nome'";
-		$res = $this->Consulta($sql);
+        $codigo = ($codigo) ? $sql .= "codigo = $codigo" : $sql.="nome LIKE '%$nome%'";
+        print_r($sql);
+
+
+		$res = $this->consulta($sql);
+        print_r($res);
 		
 		if ($res->rowCount() === 0) {
 			return []; 

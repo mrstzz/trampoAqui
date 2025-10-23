@@ -54,7 +54,7 @@ class Comerciante extends Conexao{
                     '$this->cpf',
                     '$this->criado_em',
                     '$this->atualizado_em'
-
+                    )";
         return (1);
     }
 

@@ -20,11 +20,13 @@
             <form class="search-bar" action="./pages/pesquisaIndex.php" method="post">
                 <input type="text" name ="pesquisa"   placeholder="Pesquise aqui...">
                 <!-- arruma o css aq dps, so copiei de um existente -->
-                 <select class="selectBtn">
-                    <option value="1">Cliente</option>
-                    <option value="2">Prestador</option>
-                    <option value="3">Anúncio</option>
-                    <option value="4">Tags</option>
+                 <input type="hidden" name="sla" "sla">
+                 <label for="tipo"></label>
+                 <select name ="tipo" class="selectBtn">
+                    <option value="cliente">Cliente</option>
+                    <option value="prestador">Prestador</option>
+                    <option value="anuncio">Anúncio</option>
+                    <option value="tags">Tags</option>
                  </select>
                <button type="submit">Q</button>
             </form>
