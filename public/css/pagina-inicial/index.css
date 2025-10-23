@@ -209,6 +209,15 @@ header img{
 }
 
 
+.selectBtn{
+    height: 33px;
+    width: 100px;
+    border-radius: 5px;
+    border: 2px solid rgba(0, 0, 0, 0.175);
+    box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.14);
+}
+
+
 main{
     width: 100vw;
     height: 500px;

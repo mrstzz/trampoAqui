@@ -20,10 +20,13 @@
             <form class="search-bar" action="./pages/pesquisaIndex.php" method="post">
                 <input type="text" name ="pesquisa"   placeholder="Pesquise aqui...">
                 <!-- arruma o css aq dps, so copiei de um existente -->
-                 <select name="sla" id="sla">
-                    <li>a</li>
+                 <select class="selectBtn">
+                    <option value="1">Cliente</option>
+                    <option value="2">Prestador</option>
+                    <option value="3">Anúncio</option>
+                    <option value="4">Tags</option>
                  </select>
-                <input type="submit" class = "btnSubmit" value="Q">
+               <button type="submit">Q</button>
             </form>
 
            <div class="items-bar">
