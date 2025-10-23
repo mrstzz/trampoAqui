@@ -45,11 +45,11 @@ class Cliente extends Conexao{
     }
 
 
-    function removeCliente (){
+    function removeCliente ($codigo){
 
     }
 
-    function atualizaCliente() {
+    function atualizaCliente($codigo) {
 
     }
 

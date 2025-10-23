@@ -17,9 +17,13 @@
         <img src="public/images/logo-trampo-aqui.png" alt="">
     
         <div class="navigation-bar">
-            <form class="search-bar" action="" method="post">
-                <input type="text" placeholder="Pesquise aqui...">
-                <button>Q</button>
+            <form class="search-bar" action="./pages/pesquisaIndex.php" method="post">
+                <input type="text" name ="pesquisa"   placeholder="Pesquise aqui...">
+                <!-- arruma o css aq dps, so copiei de um existente -->
+                 <select name="sla" id="sla">
+                    <li>a</li>
+                 </select>
+                <input type="submit" class = "btnSubmit" value="Q">
             </form>
 
            <div class="items-bar">

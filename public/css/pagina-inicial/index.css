@@ -83,6 +83,15 @@ header img{
     border: 2px solid rgba(0, 0, 0, 0.197);
 }
 
+.btnSubmit{
+    height: 30px;
+    border-radius: 5px;
+    color: white;
+    background-color: #043a5c;
+    box-shadow: 3px 1px 10px rgba(0, 0, 0, 0.14);
+    border: 2px solid rgba(0, 0, 0, 0.197);
+}
+
 .items-bar{
     width: 100%;
     height: 40px;
