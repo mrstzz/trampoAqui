@@ -14,19 +14,9 @@ class Comerciante extends Conexao{
     var $criado_em;
     var $atualizado_em;
 
-    function __construct($nome,$senha,$telefone,$cpf,$criado_em) {
-        
-        $this->status = $status;
-        $this->plano = $plano;
-        $this->plano_expira_em = $plano_expira_em;
-        $this->nome = $nome;
-        $this->email = $email;
-        $this->senha = $senha;
-        $this->cpf = $cpf;
-        $this->telefone = $telefone;
-        $this->$criado_em = $criado_em;
-        $this->$atualizado_em = $atualizado_em;
-    }
+    function __construct() {
+		parent::__construct();
+	}
 
 
     function insereComerciante(){

@@ -12,14 +12,9 @@ class Cliente extends Conexao{
     var $criado_em;
 
 
-     function __construct($nome = "", $email = "", $senha = "", $telefone = "", $cpf = "", $criado_em = null) {
-        $this->nome = $nome;
-        $this->email = $email;
-        $this->senha = $senha;
-        $this->telefone = $telefone;
-        $this->cpf = $cpf;
-        $this->criado_em = $criado_em;
-     }
+     function __construct() {
+		parent::__construct();
+	}
 
     function insereCliente(){
 
@@ -60,17 +55,15 @@ class Cliente extends Conexao{
         $sql = "SELECT * FROM clientes WHERE ";
 
         $codigo = ($codigo) ? $sql .= "codigo = $codigo" : $sql.="nome LIKE '%$nome%'";
-        print_r($sql);
 
 
-		$res = $this->consulta($sql);
-        print_r($res);
+		$res = Conexao::consulta($sql);
 		
 		if ($res->rowCount() === 0) {
 			return []; 
 		}
-
-		$dados = $res->fetchAll(PDO::FETCH_OBJ);
+    
+		$dados = $res->fetchAll(PDO::FETCH_ASSOC);
 
         return $dados;
 
