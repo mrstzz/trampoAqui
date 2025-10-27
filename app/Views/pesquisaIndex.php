@@ -1,8 +1,7 @@
 <?php
 
-include_once "../Classes/Conexao.php";
-include_once "../Classes/Cliente.php";
-include_once "../Classes/Comerciante.php";
+use App\Models\Cliente;
+use App\Models\Comerciante;
 
 
 extract($_POST);

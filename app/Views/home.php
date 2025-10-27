@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>trampoAqui - Seu trampo você encontra aqui!</title>
-    <link rel="stylesheet" href="public/css/pagina-inicial/index.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <img class="menu-bar" src="public/images/menu-bar.png" alt="">
+        <img class="menu-bar" src="images/menu-bar.png" alt="">
 
 
-        <img src="public/images/logo-trampo-aqui.png" alt="">
+        <img src="images/logo-trampo-aqui.png" alt="">
     
         <div class="navigation-bar">
-            <form class="search-bar" action="./pages/pesquisaIndex.php" method="post">
+            <form class="search-bar" action="/pesquisar" method="post">
                 <input type="text" name ="pesquisa"   placeholder="Pesquise aqui...">
                 <!-- arruma o css aq dps, so copiei de um existente -->
-                 <input type="hidden" name="sla" "sla">
+                 <input type="hidden" name="sla">
                  <label for="tipo"></label>
                  <select name ="tipo" class="selectBtn">
                     <option value="cliente">Cliente</option>
@@ -134,13 +134,13 @@
             
         </div>
 
-        <img class="search-icon" src="public/images/search-bar.png" alt="">
+        <img class="search-icon" src="images/search-bar.png" alt="">
 
         <div class="user-area">
         
-            <a href="pages/login-page.php"><img src="public/images/default-user.jpg" alt=""></a>
+            <a href="/login"><img src="images/default-user.jpg" alt=""></a>
 
-            <a style="font-weight:700;" href="pages/login-page.php">Faça Login</a>
+            <a style="font-weight:700;" href="/login">Faça Login</a>
 
 
         </div>

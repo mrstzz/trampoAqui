@@ -1,8 +1,13 @@
+
+#env
 .env
 
 # Arquivos de log
 *.log
 logs/
+
+# vendor 
+vendor/
 
 # Arquivos temporários e de cache
 tmp/

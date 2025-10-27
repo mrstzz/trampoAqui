@@ -14,8 +14,8 @@
 <body>
 
     <div class="signup-box">
-        <form class="sign-left-head" action="../Classes//Usuario/create" method="POSY" >
-            <img src="../public/images/logo-trampo-aqui.png" alt="">
+        <form class="sign-left-head" action="/signup" method="POST" >
+            <img src="images/logo-trampo-aqui.png" alt="">
 
             <div class="name-box">
                 <div class="name-input-box">
