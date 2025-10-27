@@ -49,7 +49,7 @@ class AuthController {
 
 
         // Tenta logar como Cliente
-        $cliente = $this->clienteModel->buscaEmail($email);
+        $cliente = $this->clienteModel->buscaEmailCliente($email);
 
         if ($cliente && password_verify($senha, $cliente['senha'])) {
             // Login como cliente bem-sucedido
@@ -61,8 +61,8 @@ class AuthController {
         }
 
         // Tenta logar como Comerciante (ADAPTAR  Comerciante ainda)
-        /*
-        $comerciante = $this->comercianteModel->findByEmail($email); // Supondo que exista esse método
+        
+        $comerciante = $this->comercianteModel->buscaEmailComerciante($email); // Supondo que exista esse método
          if ($comerciante && password_verify($senha, $comerciante['senha'])) {
              // Login como comerciante bem-sucedido
              $_SESSION['user_id'] = $comerciante['id'];
@@ -71,7 +71,7 @@ class AuthController {
 
              $this->redirect('/painel-comerciante'); // Redireciona para o painel do comerciante
          }
-        */
+        
 
         // Se chegou aqui, o login falhou
         $_SESSION['flash_error'] = 'Email ou senha inválidos.';
@@ -123,10 +123,10 @@ class AuthController {
          // Adicionar validação de formato de telefone se necessário
          if (empty($cpf)) $errors[] = 'O CPF é obrigatório.';
           // Adicionar validação de formato e existência de CPF (implementar no Model)
-         if ($this->clienteModel->buscaCpf($cpf) /*|| $this->comercianteModel->findByCpf($cpf)*/) {
+         if ($this->comercianteModel->buscaCpfComerciante($cpf) /*|| $this->comercianteModel->findByCpf($cpf)*/) {
              $errors[] = 'Este CPF já está cadastrado.';
          }
-         if ($this->clienteModel->buscaEmail($email) /*|| $this->comercianteModel->findByEmail($email)*/) {
+         if ($this->comercianteModel->buscaEmailComerciante($email) /*|| $this->comercianteModel->findByEmail($email)*/) {
              $errors[] = 'Este Email já está cadastrado.';
          }
          if (empty($uf)) $errors[] = 'O estado (UF) é obrigatório.';
