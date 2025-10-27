@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Models;
+use PDO;
+use Core\Conexao;
+
 
 class Comerciante extends Conexao{
 

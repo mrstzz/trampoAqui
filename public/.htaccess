@@ -1,0 +1,7 @@
+.htaccesOptions -MultiViews
+RewriteEngine On
+
+# Redireciona tudo que NÃO for um arquivo ou diretório existente para index.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]

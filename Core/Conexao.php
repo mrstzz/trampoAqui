@@ -1,6 +1,13 @@
 <?php
 
+
+namespace Core;
+use PDO;
+use PDOException;
+use Exception; // Para lançar exceções
+
 require_once __DIR__ . '/../vendor/autoload.php'; 
+
 
 use Dotenv\Dotenv;
 

@@ -1,5 +1,9 @@
 <?php
-include_once "../Classes/Conexao.php";
+
+namespace App\Models;
+use PDO;
+use Core\Conexao;
+use APP\Models\funcoesGlobais;
 
 
 class Cliente extends Conexao{
@@ -16,7 +20,10 @@ class Cliente extends Conexao{
 		parent::__construct();
 	}
 
-    function insereCliente(){
+    function insereCliente($nome){
+        echo "<pre>";
+        print_r($this);
+        echo "</pre>";
 
         $sql = "INSERT INTO clientes(
                     id,
@@ -36,8 +43,9 @@ class Cliente extends Conexao{
                     '$this->criado_em 
                 )
                 ";
+        
+        print_r($sql);
         $result = $this->consulta($sql);
-
         return (1);
     }
 
@@ -66,6 +74,13 @@ class Cliente extends Conexao{
 		$dados = $res->fetchAll(PDO::FETCH_ASSOC);
 
         return $dados;
+    }
+
+    function buscaEmail ($a){
+
+    }
+
+    function buscaCpf ($a){
 
     }
 
