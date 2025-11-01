@@ -1,7 +1,7 @@
 
 #env
 .env
-
+vendor/
 # Arquivos de log
 *.log
 logs/
