@@ -1,24 +1,31 @@
 <?php
-use Classes\Cliente;
-use Classes\Comerciante;
-use Classes\AuthController;
+require_once __DIR__ . '/../vendor/autoload.php';
+session_start();
 
-$clienteModel = new Cliente();
-$comercianteModel = new Comerciante();
+use Classes\Cliente; //login como cliente
+use Classes\Comerciante; // ou login como comerciante
+use Classes\Conexao; //conexao pdo
+
+$db = new Conexao();
+$clienteModel = new Cliente($db);
+$comercianteModel = new Comerciante($db);
+
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $this->redirect('/login');
+    header("Location: /login");
+    exit;
 }
 
 $email = trim($_POST['email'] ?? '');
 $senha = $_POST['senha'] ?? '';
 
 if (empty($email) || empty($senha)) {
-        $_SESSION['flash_error'] = 'Email e senha são obrigatórios.';
-        $this->redirectWithPostData('/login', $_POST); // Redireciona mantendo o POST
+    $_SESSION['flash_error'] = 'Email e senha são obrigatórios.';
+    header("Location: /login");
+    exit; 
 }
 
-// Tenta logar como Cliente
+// Tento logar como Cliente
 $cliente = $clienteModel->buscaEmailCliente($email);
 
 if ($cliente && password_verify($senha, $cliente['senha'])) {
@@ -27,7 +34,8 @@ if ($cliente && password_verify($senha, $cliente['senha'])) {
     $_SESSION['user_name'] = $cliente['nome'];
     $_SESSION['user_type'] = 'cliente'; // Define o tipo de usuário
 
-    $this->redirect('/painel-cliente'); // Redireciona para o painel do cliente
+    header("Location: /painel-cliente");
+    exit;
 }
 
 // Se não der cento, tento logar como Comerciante
@@ -39,12 +47,10 @@ $comerciante = $comercianteModel->buscaEmailComerciante($email);
         $_SESSION['user_type'] = 'comerciante';
 
         // Redireciona para o painel do comerciante
-        header('Location: /painel-comerciante');
-        exit();
+        header("Location: /painel-comerciante");
+        exit;
     }
-
-
 // Se chegou aqui, o login falhou
 $_SESSION['flash_error'] = 'Email ou senha inválidos.';
-// Redireciona de volta para o login, mantendo o email preenchido
-$this->redirectWithPostData('/login', ['email' => $email]);
+header("Location: /login");
+exit;

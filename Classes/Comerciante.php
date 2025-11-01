@@ -2,7 +2,7 @@
 
 namespace Classes;
 use PDO;
-use Core\Conexao;
+use Classes\Conexao;
 use PDOException;
 
 class Comerciante extends Conexao{
@@ -24,7 +24,6 @@ class Comerciante extends Conexao{
     function __construct() {
 		parent::__construct();
 	}
-
 
     function insereComerciante(){
         if(!empty($nome)){

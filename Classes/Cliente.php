@@ -19,7 +19,7 @@ class Cliente extends Conexao{
     private Conexao $pdo;
 
 
-     function __construct() {
+    function __construct() {
 		parent::__construct();
 	}
 
