@@ -4,7 +4,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use Classes\Comerciante;
 use Classes\Cliente;
-use Classes\Conexao;
 
 $cliente = new Cliente();
 $comerciante = new Comerciante();
@@ -49,7 +48,6 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
     if (!$termos) $errors[] = 'Você deve aceitar os termos de privacidade.';
     // --- Fim Validações ---
 
-
     // Se houver erros, redireciona de volta com os erros e dados antigos
     if (!empty($errors)) {
         $_SESSION['flash_error'] = implode('<br>', $errors);
@@ -62,16 +60,16 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
     if ($senhaHash === false) {
         $_SESSION['flash_error'] = 'E-mail ou senha inválidos.';
-        header("Location: registrar.php"); // Os dados antigos já estão na sessão
+        header("Location: ../pages/registrar.php"); // Os dados antigos já estão na sessão
         exit();
     }
 
-$result = $cliente->insereCliente($nome, $email, $senhaHash, $telefone, $uf, $cidade,$termos); 
+$result = $cliente->insereCliente($nome, $email, $senhaHash, $telefone, $cpf, date('Y-m-d H:i:s')); 
 
-if ($result['status'] === 'success') {
+if ($result) {
         unset($_SESSION['old_input']); // Limpa dados antigos em caso de sucesso
         $_SESSION['flash_success'] = 'Cadastro realizado com sucesso! Faça o login.';
-        header("Location: login-page.php");
+        header("Location: ../pages/login.php");
         exit();
 } else {
     $_SESSION['flash_error'] = $result['message'] ?? 'Erro inesperado ao cadastrar. Tente novamente.';

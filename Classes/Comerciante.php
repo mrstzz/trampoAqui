@@ -6,9 +6,6 @@ use Classes\Conexao;
 use PDOException;
 
 class Comerciante extends Conexao{
-
-    private Conexao $pdo;
-
     var $id;
     var $status;
     var $plano;
@@ -34,7 +31,6 @@ class Comerciante extends Conexao{
         }
 
         $sql = "INSERT INTO comerciantes (
-            id,
             nome,
             email,
             senha,
@@ -60,8 +56,8 @@ class Comerciante extends Conexao{
         ];
 
         try{
-            $this->pdo->consulta($sql, $parametros);
-            $insertId = $this->pdo->getInsertId();
+            $this->consulta($sql, $parametros);
+            $insertId = $this->getInsertId();
             return [
                 'success' => true,
                 'id' => $insertId
@@ -80,7 +76,7 @@ class Comerciante extends Conexao{
         $arguments = [':id' => $this->id];
 
         try{
-            $stmt = $this->pdo->consulta($sql, $arguments);
+            $stmt = $this->consulta($sql, $arguments);
 
             if ($stmt->rowCount() > 0) {
                 return [
@@ -124,8 +120,8 @@ class Comerciante extends Conexao{
         $arguments = ['id' => $this->id];
         
         try{
-            $this->pdo->consulta($sql, $arguments);
-            $insertId = $this->pdo->getInsertId();
+            $this->consulta($sql, $arguments);
+            $insertId = $this->getInsertId();
             return [
                 'success' => true,
                 'id' => $insertId
@@ -158,7 +154,7 @@ class Comerciante extends Conexao{
         $arguments = [':email' => $email];
 
         try{
-            $stmt = $this->pdo->consulta($sql, $arguments);
+            $stmt = $this->consulta($sql, $arguments);
             $response = $stmt->fetch(PDO::FETCH_ASSOC);
     
             return $response?:null;
@@ -175,7 +171,7 @@ class Comerciante extends Conexao{
         $parametros = [':cpf' => $cpf];
 
         try{
-            $stmt = $this->pdo->consulta($sql, $parametros);
+            $stmt = $this->consulta($sql, $parametros);
             $response = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $response?:null;

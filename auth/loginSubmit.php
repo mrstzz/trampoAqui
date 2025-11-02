@@ -1,14 +1,12 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 session_start();
 
 use Classes\Cliente; //login como cliente
 use Classes\Comerciante; // ou login como comerciante
-use Classes\Conexao; //conexao pdo
 
-$db = new Conexao();
-$clienteModel = new Cliente($db);
-$comercianteModel = new Comerciante($db);
+$clienteModel = new Cliente();
+$comercianteModel = new Comerciante();
 
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

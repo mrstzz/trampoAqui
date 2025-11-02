@@ -23,16 +23,19 @@ class Cliente extends Conexao{
 		parent::__construct();
 	}
 
-    function insereCliente($nome){
+    function insereCliente($nome, $email, $senhaHash, $telefone, $cpf, $criado_em){
         if(!empty($nome)){
             $this->nome = $nome;
         }
         if(empty($criado_em)){
             $criado_em = date('Y-m-d H:i:s');
         }
+        if(!empty($email)){
+            $this->email = $email;
+        }
+        $senhaHash = password_hash($this->senha, PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO clientes (
-            id,
             nome,
             email,
             senha,
@@ -49,17 +52,17 @@ class Cliente extends Conexao{
         )";
 
         $parametros = [
-            ':nome' => $this->nome,
-            ':email' => $this->email,
-            ':senha' => password_hash($this->senha, PASSWORD_DEFAULT),
-            ':telefone' => $this->telefone,
-            ':cpf' => $this->cpf,
-            ':criado_em' => $this->criado_em
+            ':nome' => $nome,
+            ':email' => $email,
+            ':senha' => $senhaHash,
+            ':telefone' => $telefone,
+            ':cpf' => $cpf,
+            ':criado_em' => $criado_em
         ];
 
         try{
-            $this->pdo->consulta($sql, $parametros);
-            $insertId = $this->pdo->getInsertId();
+            $this->consulta($sql, $parametros);
+            $insertId = $this->getInsertId();
             return [
                 'success' => true,
                 'id' => $insertId
@@ -78,7 +81,7 @@ class Cliente extends Conexao{
         $arguments = [':id' => $this->id];
 
         try{
-            $stmt = $this->pdo->consulta($sql, $arguments);
+            $stmt = $this->consulta($sql, $arguments);
 
             if ($stmt->rowCount() > 0) {
                 return [
@@ -122,8 +125,8 @@ class Cliente extends Conexao{
         $arguments = ['id' => $this->id];
         
         try{
-            $this->pdo->consulta($sql, $arguments);
-            $insertId = $this->pdo->getInsertId();
+            $this->consulta($sql, $arguments);
+            $insertId = $this->getInsertId();
             return [
                 'success' => true,
                 'id' => $insertId
@@ -159,7 +162,7 @@ class Cliente extends Conexao{
         $arguments = [':email' => $email];
 
         try{
-            $stmt = $this->pdo->consulta($sql, $arguments);
+            $stmt = $this->consulta($sql, $arguments);
             $response = $stmt->fetch(PDO::FETCH_ASSOC);
     
             return $response?:null;
@@ -176,7 +179,7 @@ class Cliente extends Conexao{
         $parametros = [':cpf' => $cpf];
 
         try{
-            $stmt = $this->pdo->consulta($sql, $parametros);
+            $stmt = $this->consulta($sql, $parametros);
             $response = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $response?:null;

@@ -136,9 +136,9 @@
 
         <div class="user-area">
         
-            <a href="/login"><img src="assets/images/default-user.jpg" alt=""></a>
+            <a href="pages/login.php"><img src="assets/images/default-user.jpg" alt=""></a>
 
-            <a style="font-weight:700;" href="./pages/login.php">Faça Login</a>
+            <a style="font-weight:700;">Faça Login</a>
         </div>
     
     </header>

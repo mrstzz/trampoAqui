@@ -24,7 +24,7 @@ class Conexao
 
             $db_driver = $_ENV['DB_DRIVER'] ?? 'mysql';
             $db_host = $_ENV['DB_HOST'] ?? 'localhost';
-            $db_name = $_ENV['DB_NAME'] ?? 'meu_banco';
+            $db_name = $_ENV['DB_NAME'] ?? 'trampoaqui';
             $db_user = $_ENV['DB_USER'] ?? 'root';
             $db_pass = $_ENV['DB_PASS'] ?? '';
             $db_charset = $_ENV['DB_CHARSET'] ?? 'utf8mb4';
