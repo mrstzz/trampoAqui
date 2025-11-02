@@ -84,6 +84,7 @@ body{
 .name-box{
     display: flex;
     gap: 10px;
+
 }
 
 .sign-right-head{

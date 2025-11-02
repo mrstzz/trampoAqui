@@ -4,11 +4,12 @@
     },
     "autoload": {
         "psr-4": {
+            "CodeExpert\\": "src/",
             "App\\": "app/",
             "Classes\\": "Classes/"
         },
         "classmap": [
-            "core/"
+            "Classes/"
         ]
     }
     
