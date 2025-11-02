@@ -54,6 +54,14 @@ body{
     display: flex;
 }
 
+.error-inline {
+    display: block;
+    color: #cc0000;
+    font-size: 0.9rem;
+    margin-top: 2px;
+    font-weight: 500;
+}
+
 .sign-left-head input[type="checkbox"]{
     height: 20px;
     width: auto;

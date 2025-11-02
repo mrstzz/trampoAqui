@@ -29,29 +29,32 @@ $_SESSION['old_input'] = $_POST;
 unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha']);
 
     // --- Validações ---
-    $errors = [];
-    if (empty($nome)) $errors[] = 'O nome é obrigatório.';
-    if (empty($email)) $errors[] = 'O email é obrigatório.';
+    $errors = $_SESSION['errors'] ?? [];
+    unset($_SESSION['errors']);
+    if (empty($nome)) $errors['nome'] = 'O nome é obrigatório.';
+    if (empty($email)) $errors['email'] = 'O email é obrigatório.';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'O email invlálido.';
-    if (empty($senha)) $errors[] = 'A senha é obrigatória.';
-    if ($senha !== $confirmaSenha) $errors[] = 'As senhas não são iguais.';
-    if (empty($telefone)) $errors[] = 'O telefone é obrigatório.';
-    if (empty($cpf)) $errors[] = 'O CPF é obrigatório.';
+    if (empty($senha)) $errors['senha'] = 'A senha é obrigatória.';
+    if ($senha !== $confirmaSenha) $errors['senhaDiferentes'] = 'As senhas não são iguais.';
+    if (empty($telefone)) $errors['telefone'] = 'O telefone é obrigatório.';
+    if (empty($cpf)) $errors['cpf'] = 'O CPF é obrigatório.';
     if ($comerciante->buscaCpfComerciante($cpf)) {
-        $errors[] = 'Este CPF já está cadastrado.';
+        $errors['cpf'] = 'Este CPF já está cadastrado.';
     }
     if ($comerciante->buscaEmailComerciante($email)) {
-        $errors[] = 'Este Email já está cadastrado.';
+        $errors['cpf'] = 'Este Email já está cadastrado.';
     }
-    if (empty($uf)) $errors[] = 'O estado (UF) é obrigatório.';
-    if (empty($cidade)) $errors[] = 'A cidade é obrigatória.';
-    if (!$termos) $errors[] = 'Você deve aceitar os termos de privacidade.';
+    if (empty($uf)) $errors['uf'] = 'O estado (UF) é obrigatório.';
+    if (empty($cidade)) $errors['cidade'] = 'A cidade é obrigatória.';
+    if (!$termos) $errors['privacidade'] = 'Você deve aceitar os termos de privacidade.';
     // --- Fim Validações ---
 
     // Se houver erros, redireciona de volta com os erros e dados antigos
     if (!empty($errors)) {
-        $_SESSION['flash_error'] = implode('<br>', $errors);
-        header("Location: registrar.php"); // Os dados antigos já estão na sessão
+        $_SESSION['errors'] = $errors;
+        $_SESSION['old_input'] = $_POST;
+        unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha']);
+        header("Location: ../pages/registrar.php");
         exit();
     }
 
