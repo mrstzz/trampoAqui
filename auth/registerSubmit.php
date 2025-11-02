@@ -42,7 +42,13 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
         $errors['cpf'] = 'Este CPF já está cadastrado.';
     }
     if ($comerciante->buscaEmailComerciante($email)) {
-        $errors['cpf'] = 'Este Email já está cadastrado.';
+        $errors['cpf'] = 'Este Email já está sendo utilizado por outro usuário.';
+    }
+    if ($cliente->buscaCpfCliente($cpf)) {
+        $errors['cpf'] = 'Este CPF já está cadastrado.';
+    }
+    if ($cliente->buscaEmailCliente($email)) {
+        $errors['cpf'] = 'Este Email já está sendo utilizado por outro usuário.';
     }
     if (empty($uf)) $errors['uf'] = 'O estado (UF) é obrigatório.';
     if (empty($cidade)) $errors['cidade'] = 'A cidade é obrigatória.';
