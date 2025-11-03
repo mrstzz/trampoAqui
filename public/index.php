@@ -1,31 +1,3 @@
-<?php
-// Em um cenário MVC real, isso viria do seu Controller:
-// $categorias = $this->categoriaModel->buscarTodas();
-
-// Para este exemplo, vamos definir os dados aqui:
-
-
-$categorias = [
-    'Construção e Reformas' => [
-        'Pedreiro', 'Pintor', 'Eletricista', 'Encanador', 'Gesseiro', 'Serralheiro', 'Marceneiro', 'Azuleijista'
-    ],
-    'Manutenção e Reparos' => [
-        'Técnico de Informática', 'Manutenção de Eletrodomésticos', 'Mecânico de Autos e Motos', 'Chaveiro', 'Vidraceiro', 'Instalador de Ar-Condicionado'
-    ],
-    'Limpeza e Conservação' => [
-        'Diarista', 'Faxineiro(a)', 'Jardinagem', 'Detetização', 'Lavagem de Sofás', 'Piscineiro'
-    ],
-    'Consultoria e Serviços' => [
-        'Contador', 'Advogado', 'Designer Gráfico', 'Marketing Digital', 'Consultoria Empresarial', 'Desenvolvedor de Sites / Apps'
-    ],
-    'Saúde e Bem-estar' => [
-        'Personal Trainer', 'Massoterapeuta', 'Cabeleireiro', 'Esteticista', 'Manicure', 'Nutricionista', 'Psicólogo'
-    ],
-    'Eventos e Entretenimento' => [
-        'Fotógrafo', 'Filmagem', 'DJ', 'Banda/Músicos', 'Cerimonialista', 'Decoração de Festas', 'Buffet'
-    ],
-];
-?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
