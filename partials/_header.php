@@ -36,7 +36,7 @@
                 </form>
             </div>
 
-            <div class="flex items-center space-x-12">
+            <div class="flex items-center space-x-20">
                 
                 <div class="hidden lg:block group relative">
                     <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium">Categorias</a>
