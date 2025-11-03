@@ -27,7 +27,7 @@ unset($_SESSION['old_input']);
     <div class="left-head"></div>
     <div class="right-head">
         
-    <form class="cadastro-box" action="../auth/loginSubmit.php" method="POST">
+    <form class="cadastro-box" action="/auth/loginSubmit.php" method="POST">
         <img src="../assets/images/logo-trampo-aqui.png" alt="">
         <div class="input-box">
             <p>Email</p>

@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '../../../vendor/autoload.php';
 session_start();
 
 use Classes\Cliente; 
@@ -31,13 +31,20 @@ $logado = false;
 
 // Tento logar como Cliente
 $cliente = $clienteModel->buscaEmailCliente($email);
+print_r($cliente);
+print_r($senha);die;
+
 if ($cliente && password_verify($senha, $cliente['senha'])) {
+
+    print_r('a');die;
+
+    
     // Login como cliente bem-sucedido
     $_SESSION['user_id'] = $cliente['id'];
     $_SESSION['user_name'] = $cliente['nome'];
     $_SESSION['user_type'] = 'cliente';
     $logado = true;
-    header("Location: ../pages/areaLogada/cliente/painel-cliente.php");
+    header("Location: ../pages/cliente/painel-cliente.php");
     exit();
 }
 

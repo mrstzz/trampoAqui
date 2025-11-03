@@ -81,7 +81,7 @@ unset($_SESSION['old_input']);
                 
                 <div class="col-md-7 p-4 p-md-5 form-column-content">
 
-                    <form action="../auth/registerSubmit.php" method="POST" class="needs-validation" novalidate>
+                    <form action="/auth/registerSubmit.php" method="POST" class="needs-validation" novalidate>
                         
                         <div class="text-center text-md-start mb-4">
                             <img src="../assets/images/logo-trampo-aqui.png" alt="Logo TrampoAqui" class="logo-image">
