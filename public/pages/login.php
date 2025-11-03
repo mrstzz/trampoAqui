@@ -16,52 +16,99 @@ unset($_SESSION['old_input']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>trampoAqui - Bem vindo de volta!</title>
-    <link rel="stylesheet" href="../assets/css/login-page.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    },
+                    colors: {
+                        'trampo-orange': '#FF7F00', // Laranja principal
+                        'trampo-blue': '#2563EB', // Azul principal
+                        'trampo-dark-orange': '#E56D00' // Laranja mais escuro para o degradê
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<style>
-    .error-inline {
-        color: #dc3545;
-        font-size: 0.875em;
-        display: block;
-    }
-    .success_inline {
-        color: green;
-        font-size: 0.875em;
-        display: block;
-    }
-</style>
-<body>
-    <div class="left-head"></div>
-    <div class="right-head">
+<body class="font-poppins">
+
+    <div class="flex min-h-screen">
         
-    <form class="cadastro-box" action="../auth/loginSubmit.php" method="POST">
-        <?php if (isset($success['success'])): ?> 
-            <div class="success_inline"><?= htmlspecialchars($success) ?></div>
-        <?php endif; ?>
-        <img src="../assets/images/logo-trampo-aqui.png" alt="">
-        <div class="input-box">
-            <p>Email</p>
-            <input type="text" name="email" placeholder=" Insira seu e-mail..." value="<?= htmlspecialchars($old_input['email'] ?? '') ?>">
+        <div class="hidden md:flex md:w-1/2 bg-gradient-to-br from-trampo-orange to-trampo-dark-orange items-center justify-center p-12 relative overflow-hidden">
+            <h1 class="text-white text-6xl font-extrabold z-10 drop-shadow-lg">trampoAqui</h1>
+            
+            <div class="absolute inset-0 bg-black opacity-10"></div>
+            
+            <div class="absolute -top-20 -left-20 w-64 h-64 bg-white opacity-5 rounded-full filter blur-3xl"></div>
+            <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-white opacity-5 rounded-full filter blur-3xl"></div>
         </div>
 
-        <div class="input-box">
-            <p>Senha</p>
-            <input type="password" name="senha" placeholder=" Digite sua senha...">
+        <div class="w-full md:w-1/2 flex items-center justify-center bg-gray-100 p-8">
+            
+            <form class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md" action="/auth/loginSubmit.php" method="POST">
+                
+                <div class="flex justify-center mb-6">
+                    <img src="../assets/images/logo-trampo-aqui.png" alt="TrampoAqui Logo" class="w-32">
+                </div>
+
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Email</label>
+                    <input 
+                        type="text" 
+                        id="email"
+                        name="email" 
+                        placeholder="Insira seu e-mail..." 
+                        value="<?= htmlspecialchars($old_input['email'] ?? '') ?>"
+                        class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
+                    >
+                </div>
+
+                <div class="mb-6">
+                    <label for="senha" class="block text-gray-700 text-sm font-semibold mb-2">Senha</label>
+                    <input 
+                        type="password" 
+                        id="senha"
+                        name="senha" 
+                        placeholder="Digite sua senha..."
+                        class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
+                    >
+                </div>
+
+                <?php if (isset($errors['input'])): ?> 
+                    <div class="text-red-500 text-sm mb-4 text-center font-medium">
+                        <?= $errors['input'] ?>
+                    </div>
+                <?php endif; ?>
+
+                <button 
+                    type="submit"
+                    class="w-full bg-trampo-blue text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-trampo-blue focus:ring-offset-2"
+                >
+                    Entrar
+                </button>
+                
+                <div class="text-center mt-6">
+                    <a href="registrar.php" class="text-sm text-trampo-blue hover:text-blue-800 transition-colors">
+                        Criar uma Conta
+                    </a>
+                </div>
+
+            </form>
         </div>
-        
-        <?php if (isset($errors['input'])): ?> 
-            <div class="error-inline"><?= $errors['input'] ?></div>
-        <?php endif; ?>
-
-        <button type="submit">Entrar</button>
-        
-        <a href="registrar.php">Criar uma Conta</a>
-    </form>
-        
-
-
 
     </div>
+    <footer class="w-full bg-gray-800 text-gray-300 text-center p-8">
+        &copy; Todos os Direitos Reservados - trampoAqui 2025
+    </footer>
+
+
 </body>
 </html>
