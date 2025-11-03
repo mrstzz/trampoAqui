@@ -136,16 +136,16 @@ class Comerciante extends Conexao{
 
     function pesquisaComerciante ($id = FALSE, $nome = FALSE){
 
+
         $sql = "SELECT * FROM Comerciantes WHERE ";
 
-        $id = ($id) ? $sql .= "id = $id" : $sql.="nome LIKE '$nome'";
+        $id = ($id) ? $sql .= "id = $id" : $sql.="nome LIKE '%$nome%'";
 		$res = $this->Consulta($sql);
 		
 		if ($res->rowCount() === 0) {
 			return []; 
 		}
-
-		$dados = $res->fetchAll(PDO::FETCH_OBJ);
+		$dados = $res->fetchAll(PDO::FETCH_ASSOC);
 
         return $dados;
     }

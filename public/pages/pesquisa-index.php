@@ -87,6 +87,7 @@ if ($tipo == 'cliente') {
                 <div class="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
                     
                     <?php foreach ($busca as $item) : ?>
+                        
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden break-inside-avoid">
                         
                         <div class="p-5 border-b border-gray-200 text-center">
