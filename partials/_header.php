@@ -1,4 +1,5 @@
 <?php
+
     $categorias = [
         'Construção e Reformas' => ['Pedreiro', 'Pintor', 'Eletricista', 'Encanador', 'Gesseiro', 'Serralheiro', 'Marceneiro', 'Azuleijista'],
         'Manutenção e Reparos' => ['Técnico de Informática', 'Manutenção de Eletrodomésticos', 'Mecânico de Autos e Motos', 'Chaveiro', 'Vidraceiro'],
