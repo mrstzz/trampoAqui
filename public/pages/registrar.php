@@ -6,6 +6,20 @@ unset($_SESSION['errors']);
 
 $old_input = $_SESSION['old_input'] ?? [];
 unset($_SESSION['old_input']);
+
+// Lista de UFs (movida para cima para organizar o HTML)
+$estados = [
+    'AC' => 'Acre (AC)', 'AL' => 'Alagoas (AL)', 'AP' => 'Amapá (AP)',
+    'AM' => 'Amazonas (AM)', 'BA' => 'Bahia (BA)', 'CE' => 'Ceará (CE)',
+    'DF' => 'Distrito Federal (DF)', 'ES' => 'Espírito Santo (ES)', 'GO' => 'Goiás (GO)',
+    'MA' => 'Maranhão (MA)', 'MT' => 'Mato Grosso (MT)', 'MS' => 'Mato Grosso do Sul (MS)',
+    'MG' => 'Minas Gerais (MG)', 'PA' => 'Pará (PA)', 'PB' => 'Paraíba (PB)',
+    'PR' => 'Paraná (PR)', 'PE' => 'Pernambuco (PE)', 'PI' => 'Piauí (PI)',
+    'RJ' => 'Rio de Janeiro (RJ)', 'RN' => 'Rio Grande do Norte (RN)', 'RS' => 'Rio Grande do Sul (RS)',
+    'RO' => 'Rondônia (RO)', 'RR' => 'Roraima (RR)', 'SC' => 'Santa Catarina (SC)',
+    'SP' => 'São Paulo (SP)', 'SE' => 'Sergipe (SE)', 'TO' => 'Tocantins (TO)'
+];
+$selectedUf = $old_input['estado'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -14,202 +28,173 @@ unset($_SESSION['old_input']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastre-se - trampoAqui</title>
-    <link rel="stylesheet" href="../assets/css/signup-page.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     
-    <style>
-        body {
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px 0;
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    },
+                    colors: {
+                        'trampo-orange': '#FF7F00', // Laranja principal
+                        'trampo-blue': '#2563EB', // Azul principal
+                        'trampo-dark-orange': '#E56D00', // Laranja mais escuro para o degradê
+                        'trampo-light-orange': '#FFD7A0' // Laranja mais claro para o header dos termos
+                    }
+                }
+            }
         }
-
-        .signup-card {
-            width: 100%;
-            max-width: 1500px;
-            height: 100%;
-            border: none;
-            border-radius: 8px;
-            overflow: hidden; 
-        }   
-        .terms-column {
-            background-color: #e5993e;
-            color: #fff;
-            padding: 2rem;
-            max-height: 750px;
-            overflow-y: auto;
-        }
-        .terms-column .terms-header {
-            background-color: #cd853f; 
-            padding: 10px 1rem;
-            margin: -2rem -2rem 1.5rem -2rem; 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            font-weight: 600;
-        }
-
-        .logo-image {
-            width: 150px;
-            height: auto;
-            margin-bottom: 2rem;
-        }
-
-        .error-inline {
-            color: #dc3545;
-            font-size: 0.875em;
-            display: block;
-        }
-        
-        .form-label {
-            font-weight: 500;
-        }
-        
-    </style>
+    </script>
 </head>
 
-<body>
-    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        
-        <div class="card shadow-lg signup-card">
-            
-            <div class="row g-0">
-                
-                <div class="col-md-7 p-4 p-md-5 form-column-content">
+<body class="font-poppins bg-gray-100 flex flex-col min-h-screen">
 
-                    <form action="/auth/registerSubmit.php" method="POST" class="needs-validation" novalidate>
+    <main class="flex-1 flex items-center justify-center py-8 px-4">
+
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden w-full max-w-6xl">
+            <div class="flex flex-col md:flex-row">
+
+                <div class="w-full md:w-7/12 p-6 md:p-10 overflow-y-auto">
+                    <form action="/auth/registerSubmit.php" method="POST" class="space-y-4">
                         
-                        <div class="text-center text-md-start mb-4">
-                            <img src="../assets/images/logo-trampo-aqui.png" alt="Logo TrampoAqui" class="logo-image">
+                        <div class="text-center md:text-left mb-6">
+                            <img src="../assets/images/logo-trampo-aqui.png" alt="Logo TrampoAqui" class="w-28 mx-auto md:mx-0">
                         </div>
 
-                        <div class="mb-3">
-                            <label for="nome" class="form-label">Nome Completo</label>
-                            <input type="text" class="form-control" id="nome" name="nome" placeholder="João da Silva"
-                                value="<?= htmlspecialchars($_SESSION['nome'] ?? '') ?>" required>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center md:text-left">Crie sua conta</h2>
+
+                        <div>
+                            <label for="nome" class="block text-gray-700 text-sm font-semibold mb-2">Nome Completo</label>
+                            <input type="text" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
+                                id="nome" name="nome" placeholder="João da Silva"
+                                value="<?= htmlspecialchars($old_input['nome'] ?? '') ?>" required>
                             <?php if (isset($errors['nome'])): ?>
-                                <div class="error-inline"><?= $errors['nome'] ?></div>
+                                <div class="text-red-500 text-xs mt-1"><?= $errors['nome'] ?></div>
                             <?php endif; ?>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email..."
-                                value="<?= htmlspecialchars($_SESSION['email'] ?? '') ?>" required>
+                        <div>
+                            <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
+                                id="email" name="email" placeholder="seu.email@example.com"
+                                value="<?= htmlspecialchars($old_input['email'] ?? '') ?>" required>
                             <?php if (isset($errors['email'])): ?>
-                                <div class="error-inline"><?= $errors['email'] ?></div>
+                                <div class="text-red-500 text-xs mt-1"><?= $errors['email'] ?></div>
                             <?php endif; ?>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="cpf" class="form-label">CPF</label>
-                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF..."
-                                value="<?= htmlspecialchars($_SESSION['cpf'] ?? '') ?>" required>
+                        <div>
+                            <label for="cpf" class="block text-gray-700 text-sm font-semibold mb-2">CPF</label>
+                            <input type="text" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
+                                id="cpf" name="cpf" placeholder="000.000.000-00"
+                                value="<?= htmlspecialchars($old_input['cpf'] ?? '') ?>" required>
                             <?php if (isset($errors['cpf'])): ?>
-                                <div class="error-inline"><?= $errors['cpf'] ?></div>
+                                <div class="text-red-500 text-xs mt-1"><?= $errors['cpf'] ?></div>
                             <?php endif; ?>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="telefone" class="form-label">Telefone</label>
-                            <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Telefone..."
-                                value="<?= htmlspecialchars($_SESSION['telefone'] ?? '') ?>" required>
+                        <div>
+                            <label for="telefone" class="block text-gray-700 text-sm font-semibold mb-2">Telefone</label>
+                            <input type="tel" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
+                                id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX"
+                                value="<?= htmlspecialchars($old_input['telefone'] ?? '') ?>" required>
                             <?php if (isset($errors['telefone'])): ?>
-                                <div class="error-inline"><?= $errors['telefone'] ?></div>
+                                <div class="text-red-500 text-xs mt-1"><?= $errors['telefone'] ?></div>
                             <?php endif; ?>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="estado" class="form-label">UF</label>
-                                <select class="form-select" id="estado" name="estado" required>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="estado" class="block text-gray-700 text-sm font-semibold mb-2">UF</label>
+                                <select class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
+                                    id="estado" name="estado" required>
                                     <option value="">Selecione um estado</option>
-                                    <?php $selectedUf = $_SESSION['estado'] ?? ''; ?>
-                                    <?php
-                                        // Lista de UFs para repetição
-                                        $estados = [
-                                            'AC' => 'Acre (AC)', 'AL' => 'Alagoas (AL)', 'AP' => 'Amapá (AP)',
-                                            'AM' => 'Amazonas (AM)', 'BA' => 'Bahia (BA)', 'CE' => 'Ceará (CE)',
-                                            'DF' => 'Distrito Federal (DF)', 'ES' => 'Espírito Santo (ES)', 'GO' => 'Goiás (GO)',
-                                            'MA' => 'Maranhão (MA)', 'MT' => 'Mato Grosso (MT)', 'MS' => 'Mato Grosso do Sul (MS)',
-                                            'MG' => 'Minas Gerais (MG)', 'PA' => 'Pará (PA)', 'PB' => 'Paraíba (PB)',
-                                            'PR' => 'Paraná (PR)', 'PE' => 'Pernambuco (PE)', 'PI' => 'Piauí (PI)',
-                                            'RJ' => 'Rio de Janeiro (RJ)', 'RN' => 'Rio Grande do Norte (RN)', 'RS' => 'Rio Grande do Sul (RS)',
-                                            'RO' => 'Rondônia (RO)', 'RR' => 'Roraima (RR)', 'SC' => 'Santa Catarina (SC)',
-                                            'SP' => 'São Paulo (SP)', 'SE' => 'Sergipe (SE)', 'TO' => 'Tocantins (TO)'
-                                        ];
-                                        foreach ($estados as $uf_abbr => $uf_nome): ?>
-                                            <option value="<?= $uf_abbr ?>" <?= ($selectedUf === $uf_abbr) ? 'selected' : '' ?>>
-                                                <?= $uf_nome ?>
-                                            </option>
+                                    <?php foreach ($estados as $uf_abbr => $uf_nome): ?>
+                                        <option value="<?= $uf_abbr ?>" <?= ($selectedUf === $uf_abbr) ? 'selected' : '' ?>>
+                                            <?= $uf_nome ?>
+                                        </option>
                                     <?php endforeach; ?>
                                 </select>
-                                <?php if (isset($errors['uf'])): ?>
-                                    <div class="error-inline"><?= $errors['uf'] ?></div>
+                                <?php if (isset($errors['estado'])): ?>
+                                    <div class="text-red-500 text-xs mt-1"><?= $errors['estado'] ?></div>
                                 <?php endif; ?>
                             </div>
-                            <div class="col-md-6">
-                                <label for="cidade" class="form-label">Cidade</label>
-                                <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Digite sua cidade..."
-                                    value="<?= htmlspecialchars($_SESSION['cidade'] ?? '') ?>" required>
+                            <div>
+                                <label for="cidade" class="block text-gray-700 text-sm font-semibold mb-2">Cidade</label>
+                                <input type="text" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
+                                    id="cidade" name="cidade" placeholder="Digite sua cidade..."
+                                    value="<?= htmlspecialchars($old_input['cidade'] ?? '') ?>" required>
                                 <?php if (isset($errors['cidade'])): ?>
-                                    <div class="error-inline"><?= $errors['cidade'] ?></div>
+                                    <div class="text-red-500 text-xs mt-1"><?= $errors['cidade'] ?></div>
                                 <?php endif; ?>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="senha" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite uma senha..." required>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="senha" class="block text-gray-700 text-sm font-semibold mb-2">Senha</label>
+                                <input type="password" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
+                                    id="senha" name="senha" placeholder="Digite uma senha..." required>
                                 <?php if (isset($errors['senha'])): ?>
-                                    <div class="error-inline"><?= $errors['senha'] ?></div>
+                                    <div class="text-red-500 text-xs mt-1"><?= $errors['senha'] ?></div>
                                 <?php endif; ?>
                             </div>
-                            <div class="col-md-6">
-                                <label for="confirma-senha" class="form-label">Confirme sua senha</label>
-                                <input type="password" class="form-control" id="confirma-senha" name="confirma-senha" placeholder="Confirme sua senha..." required>
+                            <div>
+                                <label for="confirma-senha" class="block text-gray-700 text-sm font-semibold mb-2">Confirme sua senha</label>
+                                <input type="password" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
+                                    id="confirma-senha" name="confirma-senha" placeholder="Confirme sua senha..." required>
                                 <?php if (isset($errors['senhasDiferentes'])): ?>
-                                    <div class="error-inline"><?= $errors['senhasDiferentes'] ?></div>
+                                    <div class="text-red-500 text-xs mt-1"><?= $errors['senhasDiferentes'] ?></div>
                                 <?php endif; ?>
                             </div>
                         </div>
 
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="terms" name="terms" value="1"
-                                <?= isset($_SESSION['terms']) ? 'checked' : '' ?> required>
-                            <label class="form-check-label" for="terms">Eu concordo com os termos de <a href="privacidade.php">privacidade</a> do trampoAqui.</label>
-                            <?php if (isset($errors['privacidade'])): ?>
-                                <div class="error-inline"><?= $errors['privacidade'] ?></div>
+                        <div class="pt-2">
+                            <div class="flex items-start">
+                                <input type="checkbox" class="form-checkbox h-4 w-4 text-trampo-orange rounded focus:ring-trampo-orange mt-1"
+                                    id="terms" name="terms" value="1"
+                                    <?= isset($old_input['terms']) ? 'checked' : '' ?> required>
+                                <label class="ml-2 text-sm text-gray-600" for="terms">Eu concordo com os termos de <a href="privacidade.php" class="text-trampo-blue hover:underline">privacidade</a> do trampoAqui.</label>
+                            </div>
+                            <?php if (isset($errors['terms'])): ?> 
+                                <div class="text-red-500 text-xs mt-1 ml-6"><?= $errors['terms'] ?></div>
+                            <?php elseif (isset($errors['privacidade'])): ?> 
+                                <div class="text-red-500 text-xs mt-1 ml-6"><?= $errors['privacidade'] ?></div>
                             <?php endif; ?>
                         </div>
+                        
 
-                        <button type="submit" class="btn btn-dark w-100 mt-3" style="background-color: #343a40;">Finalizar Cadastro</button>
+                        <button type="submit"
+                            class="w-full bg-trampo-blue text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-trampo-blue focus:ring-offset-2 !mt-6">
+                            Finalizar Cadastro
+                        </button>
+                        
+                        <p class="text-center text-sm text-gray-600 !mt-4">Já tem uma conta? <a href="login.php" class="text-trampo-blue hover:underline">Faça login</a></p>
+
                     </form>
                 </div>
 
-                <div class="col-md-5 d-none d-md-block terms-column">
+                <div class="hidden md:block md:w-5/12 bg-gradient-to-br from-trampo-orange to-trampo-dark-orange text-white p-8 overflow-y-auto max-h-[800px] rounded-r-xl">
                     
-                    <div class="terms-header text-light">
-                        Termos de Privacidade - TrampoAqui
+                    <div class="bg-trampo-light-orange bg-opacity-20 backdrop-filter backdrop-blur-sm p-4 -mx-8 -mt-8 mb-6 rounded-t-xl md:rounded-tl-none md:rounded-tr-xl sticky top-0">
+                        <h3 class="text-xl font-bold text-white">Termos de Privacidade - TrampoAqui</h3>
                     </div>
                     
-                    <div class=" col-12 termos-privacidade px-3 d-md-block">
+                    <div class="space-y-4 text-sm leading-relaxed">
                         <p>
-                            <strong>1. Introdução</strong>
-                            <br>Bem-vindo(a) ao TrampoAqui!
-                            <br>Estes Termos de Privacidade explicam como coletamos, utilizamos e protegemos as informações pessoais
+                            <strong>1. Introdução</strong><br>Bem-vindo(a) ao TrampoAqui! Estes Termos de Privacidade explicam como coletamos, utilizamos e protegemos as informações pessoais
                             dos usuários. Nosso compromisso é garantir a transparência, a segurança e o uso responsável dos seus dados.
                         </p>
 
                         <p>
-                            <strong>2. Informações que Coletamos</strong>
-                            <br>Ao criar uma conta no TrampoAqui, podemos solicitar as seguintes informações:
-                            <ul>
+                            <strong>2. Informações que Coletamos</strong><br>Ao criar uma conta no TrampoAqui, podemos solicitar as seguintes informações:
+                            <ul class="list-disc pl-5 mt-1">
                                 <li>Dados de cadastro: nome completo, e-mail, telefone, senha, cidade, e outras informações para
                                     identificação de perfil.</li>
                                 <li>Dados de uso: registros de acesso, buscas, mensagens, avaliações e interações realizadas no site.</li>
@@ -220,9 +205,8 @@ unset($_SESSION['old_input']);
                         </p>
                         
                         <p>
-                            <strong>3. Como Usamos suas Informações</strong>
-                            <br>Os dados coletados têm como finalidade:
-                            <ul>
+                            <strong>3. Como Usamos suas Informações</strong><br>Os dados coletados têm como finalidade:
+                            <ul class="list-disc pl-5 mt-1">
                                 <li>Criar e gerenciar sua conta de usuário;</li>
                                 <li>Exibir e divulgar seus serviços, produtos ou avaliações;</li>
                                 <li>Facilitar a comunicação entre clientes e prestadores por meio do chat interno;</li>
@@ -233,17 +217,14 @@ unset($_SESSION['old_input']);
                         </p>
                         
                         <p>
-                            <strong>4. Compartilhamento de Informações</strong>
-                            <br>O TrampoAqui não vende, aluga nem compartilha seus dados pessoais com terceiros para fins comerciais.
+                            <strong>4. Compartilhamento de Informações</strong><br>O TrampoAqui não vende, aluga nem compartilha seus dados pessoais com terceiros para fins comerciais.
                         </p>
                         <p>
-                            <strong>5. Segurança dos Dados</strong>
-                            <br>Adotamos medidas de segurança técnicas e administrativas para proteger suas informações.
+                            <strong>5. Segurança dos Dados</strong><br>Adotamos medidas de segurança técnicas e administrativas para proteger suas informações.
                         </p>
                         <p>
-                            <strong>6. Direitos do Usuário (LGPD)</strong>
-                            <br>De acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você tem o direito de:
-                            <ul>
+                            <strong>6. Direitos do Usuário (LGPD)</strong><br>De acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você tem o direito de:
+                            <ul class="list-disc pl-5 mt-1">
                                 <li>Confirmar se seus dados são tratados pelo TrampoAqui;</li>
                                 <li>Solicitar o acesso, correção ou exclusão de seus dados;</li>
                                 <li>Revogar o consentimento para uso de informações pessoais;</li>
@@ -252,33 +233,28 @@ unset($_SESSION['old_input']);
                             <br>Contato: privacidade@trampoaqui.com.
                         </p>
                         <p>
-                            <strong>7. Retenção e Exclusão de Dados</strong>
-                            <br>Os dados pessoais serão mantidos enquanto sua conta estiver ativa.
+                            <strong>7. Retenção e Exclusão de Dados</strong><br>Os dados pessoais serão mantidos enquanto sua conta estiver ativa.
                         </p>
                         <p>
-                            <strong>8. Uso de Cookies</strong>
-                            <br>Utilizamos cookies para aprimorar o desempenho do site.
+                            <strong>8. Uso de Cookies</strong><br>Utilizamos cookies para aprimorar o desempenho do site.
                         </p>
                         <p>
-                            <strong>9. Alterações Nesta Política</strong>
-                            <br>O TrampoAqui poderá atualizar este documento periodicamente.
+                            <strong>9. Alterações Nesta Política</strong><br>O TrampoAqui poderá atualizar este documento periodicamente.
                         </p>
                         <p>
-                            <strong>10. Contato</strong>
-                            <br>📩 privacidade@trampoaqui.com
-                            <br>🌐 trampoaqui.com
-                            <br><br>&copy 2025 - TrampoAqui - Todos os direitos reservados
+                            <strong>10. Contato</strong><br>📩 privacidade@trampoaqui.com<br>🌐 trampoaqui.com<br><br>&copy 2025 - TrampoAqui - Todos os direitos reservados
                         </p>
                     </div>
 
                 </div>
 
             </div>
-
         </div>
 
-    </div>
+    </main> 
+    <footer class="w-full bg-gray-800 text-gray-300 text-center p-8">
+        &copy; Todos os Direitos Reservados - trampoAqui 2025
+    </footer>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </html>
