@@ -1,12 +1,14 @@
 <?php
 session_start();
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '../../../vendor/autoload.php';
 
 use Classes\Comerciante;
 use Classes\Cliente;
 
 $cliente = new Cliente();
 $comerciante = new Comerciante();
+
+// print_r($_POST);die;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: registrar.php");
@@ -42,7 +44,13 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
         $errors['cpf'] = 'Este CPF já está cadastrado.';
     }
     if ($comerciante->buscaEmailComerciante($email)) {
-        $errors['cpf'] = 'Este Email já está cadastrado.';
+        $errors['cpf'] = 'Este Email já está sendo utilizado por outro usuário.';
+    }
+    if ($cliente->buscaCpfCliente($cpf)) {
+        $errors['cpf'] = 'Este CPF já está cadastrado.';
+    }
+    if ($cliente->buscaEmailCliente($email)) {
+        $errors['cpf'] = 'Este Email já está sendo utilizado por outro usuário.';
     }
     if (empty($uf)) $errors['uf'] = 'O estado (UF) é obrigatório.';
     if (empty($cidade)) $errors['cidade'] = 'A cidade é obrigatória.';
@@ -54,7 +62,7 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
         $_SESSION['errors'] = $errors;
         $_SESSION['old_input'] = $_POST;
         unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha']);
-        header("Location: ../pages/registrar.php");
+        header("Location: /pages/registrar.php");
         exit();
     }
 
@@ -63,7 +71,7 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
     if ($senhaHash === false) {
         $_SESSION['flash_error'] = 'E-mail ou senha inválidos.';
-        header("Location: ../pages/registrar.php"); // Os dados antigos já estão na sessão
+        header("Location: /pages/registrar.php"); // Os dados antigos já estão na sessão
         exit();
     }
 
@@ -72,10 +80,10 @@ $result = $cliente->insereCliente($nome, $email, $senhaHash, $telefone, $cpf, da
 if ($result) {
         unset($_SESSION['old_input']); // Limpa dados antigos em caso de sucesso
         $_SESSION['flash_success'] = 'Cadastro realizado com sucesso! Faça o login.';
-        header("Location: ../pages/login.php");
+        header("Location: /pages/login.php");
         exit();
 } else {
     $_SESSION['flash_error'] = $result['message'] ?? 'Erro inesperado ao cadastrar. Tente novamente.';
-        header("Location: ../pages/registrar.php"); // Os dados antigos já estão na sessão
+        header("Location: /pages/registrar.php"); // Os dados antigos já estão na sessão
         exit();
 }
