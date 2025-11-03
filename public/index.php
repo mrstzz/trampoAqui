@@ -48,7 +48,7 @@ $categorias = [
             font-family: 'Poppins', sans-serif;
         }
         .swiper-button-next, .swiper-button-prev {
-            color: #4F46E5; /* Cor indigo-600 do Tailwind */
+            color: #4F46E5;
         }
         .swiper-pagination-bullet-active {
             background-color: #4F46E5;
@@ -63,7 +63,7 @@ $categorias = [
 
         <section class="bg-indigo-700 rounded-lg p-12 text-white text-center" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center;">
             <div class="bg-indigo-700 bg-opacity-70 rounded-lg p-8">
-                <h1 class="text-4xl font-bold mb-4">Encontre o profissional certo para seu trampo!</h1>
+                <h1 class="text-4xl font-bold mb-4">Encontre o profissional certo para sua demanda!</h1>
                 <p class="text-lg mb-8">De reformas a aulas particulares, conectamos você aos melhores prestadores.</p>
                 <a href="#" class="bg-white text-indigo-700 font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-100 transition duration-300">
                     Comece a Buscar
@@ -83,7 +83,7 @@ $categorias = [
                         </div>
                     </div>
                     <div class="swiper-slide bg-white rounded-lg shadow-lg overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c3e?q=80&w=2070&auto=format&fit=crop" alt="Reformas" class="w-full h-48 object-cover">
+                        <img src="https://plus.unsplash.com/premium_photo-1681691423422-bcaa3eaad7e8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="Reformas" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <h3 class="font-semibold text-lg">Reformas e Reparos</h3>
                         </div>
@@ -101,7 +101,7 @@ $categorias = [
                         </div>
                     </div>
                     <div class="swiper-slide bg-white rounded-lg shadow-lg overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1519494026892-2ba52bc411a-?q=80&w=2070&auto=format&fit=crop" alt="Saúde" class="w-full h-48 object-cover">
+                        <img src="https://images.unsplash.com/photo-1477332552946-cfb384aeaf1c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="Saúde" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <h3 class="font-semibold text-lg">Saúde e Bem-estar</h3>
                         </div>
