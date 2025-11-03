@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $email = trim($_POST['email'] ?? '');
-$senha = $_POST['senha'] ?? '';
+$senha = $_POST['senha'];
 $errors = [];
 
 // --- 1. Validação Campos Vazios ---
@@ -31,14 +31,14 @@ $logado = false;
 
 // Tento logar como Cliente
 $cliente = $clienteModel->buscaEmailCliente($email);
-print_r($cliente);
-print_r($senha);die;
 
-if ($cliente && password_verify($senha, $cliente['senha'])) {
 
-    print_r('a');die;
+// var_dump($senha);
+// var_dump(trim($cliente['senha']));
+// var_dump(password_verify($senha, $cliente['senha']));
+// die;
 
-    
+if ($cliente && password_verify($senha, $cliente['senha'])) {  
     // Login como cliente bem-sucedido
     $_SESSION['user_id'] = $cliente['id'];
     $_SESSION['user_name'] = $cliente['nome'];
@@ -51,7 +51,7 @@ if ($cliente && password_verify($senha, $cliente['senha'])) {
 // Tento logar como Comerciante, SOMENTE se não logou como cliente
 if (!$logado) {
     $comerciante = $comercianteModel->buscaEmailComerciante($email);
-    if ($comerciante && isset($cliente['senha']) && password_verify($senha, $comerciante['senha'])) {
+    if ($comerciante && isset($comerciante['senha']) && password_verify($senha, $comerciante['senha'])) {
         // Login como comerciante bem-sucedido
         $_SESSION['user_id'] = $comerciante['id'];
         $_SESSION['user_name'] = $comerciante['nome']; 

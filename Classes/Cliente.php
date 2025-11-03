@@ -23,7 +23,11 @@ class Cliente extends Conexao{
 		parent::__construct();
 	}
 
-    function insereCliente($nome, $email, $senhaHash, $telefone, $cpf, $criado_em){
+    function hashSenha($senha){
+        return password_hash($senha, PASSWORD_DEFAULT);
+    }
+
+    function insereCliente($nome, $email, $senha, $telefone, $cpf, $criado_em){
         if(!empty($nome)){
             $this->nome = $nome;
         }
@@ -33,7 +37,7 @@ class Cliente extends Conexao{
         if(!empty($email)){
             $this->email = $email;
         }
-        $senhaHash = password_hash($this->senha, PASSWORD_DEFAULT);
+        $this->hashSenha($senha);
 
         $sql = "INSERT INTO clientes (
             nome,
@@ -54,7 +58,7 @@ class Cliente extends Conexao{
         $parametros = [
             ':nome' => $nome,
             ':email' => $email,
-            ':senha' => $senhaHash,
+            ':senha' => $senha,
             ':telefone' => $telefone,
             ':cpf' => $cpf,
             ':criado_em' => $criado_em

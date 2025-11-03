@@ -4,6 +4,9 @@ session_start();
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
 
+$success = $_SESSION['success'] ?? '';
+unset($_SESSION['success']);
+
 $old_input = $_SESSION['old_input'] ?? [];
 unset($_SESSION['old_input']);
 ?>
