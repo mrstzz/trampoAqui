@@ -79,7 +79,7 @@ $result = $cliente->insereCliente($nome, $email, $senhaHash, $telefone, $cpf, da
 
 if ($result) {
         unset($_SESSION['old_input']); // Limpa dados antigos em caso de sucesso
-        $_SESSION['flash_success'] = 'Cadastro realizado com sucesso! Faça o login.';
+        $_SESSION['success'] = 'Cadastro realizado com sucesso! Faça o login.';
         header("Location: /pages/login.php");
         exit();
 } else {

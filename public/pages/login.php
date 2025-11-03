@@ -4,6 +4,9 @@ session_start();
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
 
+$success = $_SESSION['success'] ?? '';
+unset($_SESSION['success']);
+
 $old_input = $_SESSION['old_input'] ?? [];
 unset($_SESSION['old_input']);
 ?>
@@ -22,12 +25,20 @@ unset($_SESSION['old_input']);
         font-size: 0.875em;
         display: block;
     }
+    .success_inline {
+        color: green;
+        font-size: 0.875em;
+        display: block;
+    }
 </style>
 <body>
     <div class="left-head"></div>
     <div class="right-head">
         
-    <form class="cadastro-box" action="/auth/loginSubmit.php" method="POST">
+    <form class="cadastro-box" action="../auth/loginSubmit.php" method="POST">
+        <?php if (isset($success['success'])): ?> 
+            <div class="success_inline"><?= htmlspecialchars($success) ?></div>
+        <?php endif; ?>
         <img src="../assets/images/logo-trampo-aqui.png" alt="">
         <div class="input-box">
             <p>Email</p>
