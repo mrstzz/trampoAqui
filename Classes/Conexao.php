@@ -65,7 +65,7 @@ class Conexao
             $stmt->execute($params);
 
             if (stripos(trim($query), 'INSERT') === 0) {
-                 $this->insert_id = $pdo->lastInsertId();
+                $this->insert_id = $pdo->lastInsertId();
             }
             
             return $stmt; 
