@@ -42,6 +42,7 @@ if ($cliente && password_verify($senha, $cliente['senha'])) {
     // Login como cliente bem-sucedido
     $_SESSION['user_id'] = $cliente['id'];
     $_SESSION['user_name'] = $cliente['nome'];
+    $_SESSION['user_email'] = $cliente['email'];
     $_SESSION['user_type'] = 'cliente';
     $logado = true;
     header("Location: ../pages/cliente/painel-cliente.php");
