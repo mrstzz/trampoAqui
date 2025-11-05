@@ -1,5 +1,6 @@
 <?php
 namespace Classes;
+use PDO;
 
 class Anuncio extends Conexao {
     public function __construct() {
@@ -46,4 +47,10 @@ class Anuncio extends Conexao {
         $params = [':id' => $id];
         return $this->consulta($sql, $params);
     }
+
+    public function pesquisaTodosAnuncios() {
+        $sql = "SELECT * FROM anuncios WHERE status LIKE 'ativo'";
+        return $this->consulta($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

@@ -1,0 +1,227 @@
+*{
+    margin:0;
+    padding:0;
+    
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-box{
+    height: 550px;
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+    border: 10px solid rgb(231, 231, 255);
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.head-bar{
+    height: 100px;
+    width: 100%;
+    background-color: orange;
+    display: flex;
+}
+
+.img-div{
+    height: 100%;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-div img{
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.user-profile{
+    height: 100%;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+}
+
+.exp{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    color: white;
+}
+
+.left-body-box{
+    width: 50%;
+    height: 370px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    top: 100px;
+    left: 0;
+}
+
+.right-body-box{
+    width: 50%;
+    height: 370px;
+    position: absolute;
+    top: 100px;
+    right: 0;
+}
+
+.interaction-bar{
+    background-color: rgb(244, 244, 244);
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+    display: flex;
+}
+
+.left-hand-inter-bar{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.right-hand-inter-bar{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+.interaction-btn{
+    width: 50px;
+    height: 80%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.interaction-btn:hover{
+    background-color: orange;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.left-body-box img{
+    width: 85%;
+    height: 300px;
+    box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.11);
+    border-radius: 5px;
+}
+
+.description{
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: bold;
+}
+
+.description-box{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.container-right-box{
+    width: 100%;
+    height: 138px;
+    display: flex;
+    
+}
+
+.info-box{
+    width: 100%;
+    height: 138px;
+    display: flex;
+}
+
+.left-info{
+    width: 50%;
+    height: 100%;
+}
+
+.right-info{
+    width: 50%;
+    height: 100%;
+}
+
+.value-box{
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+
+
+.hire-box{
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.favorite-btn{
+    width: auto;
+    height: 47px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(170, 170, 255);
+}
+
+.favorite-btn svg:hover{
+    fill: yellow;
+    transition: 1s;
+}
+
+.hire-box button{
+    width: 150px;
+    height: 50px;
+    background-color: rgb(100, 100, 223);
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+.hire-box button:hover{
+    cursor: pointer;
+    background-color: rgb(48, 40, 40);
+    color: rgb(255, 255, 255);
+    transition: 1s;
+}
+
+.emblemas img{
+    width: 50px;
+    height: auto;
+}

@@ -136,6 +136,8 @@ class Comerciante extends Conexao{
 
     function pesquisaComerciante ($id = FALSE, $nome = FALSE){
 
+        
+
 
         $sql = "SELECT * FROM Comerciantes WHERE ";
 
