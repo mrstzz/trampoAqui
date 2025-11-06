@@ -98,6 +98,15 @@ $selectedUf = $old_input['estado'] ?? '';
                                 <div class="text-red-500 text-xs mt-1"><?= $errors['cpf'] ?></div>
                             <?php endif; ?>
                         </div>
+                        <div>
+                            <label for="data_nascimento" class="block text-gray-700 text-sm font-semibold mb-2">Data de Nascimento</label>
+                            <input type="date" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
+                                id="data_nascimento" name="data_nascimento" placeholder="dd/mm/aaaa"
+                                value="<?= htmlspecialchars($old_input['data_nascimento'] ?? '') ?>" required>
+                            <?php if (isset($errors['data_nascimento'])): ?>
+                                <div class="text-red-500 text-xs mt-1"><?= $errors['data_nascimento'] ?></div>
+                            <?php endif; ?>
+                        </div>
 
                         <div>
                             <label for="telefone" class="block text-gray-700 text-sm font-semibold mb-2">Telefone</label>
