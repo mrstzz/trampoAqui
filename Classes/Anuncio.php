@@ -49,7 +49,19 @@ class Anuncio extends Conexao {
     }
 
     public function pesquisaTodosAnuncios() {
-        $sql = "SELECT * FROM anuncios WHERE status LIKE 'ativo'";
+        $sql = "SELECT 
+                    an.*,
+                    aa.*,
+                    comerc.nome,
+                    comerc.telefone
+                FROM 
+                    anuncios an
+                INNER JOIN
+                    comerciantes comerc ON comerc.id = an.comerc_id
+                LEFT JOIN 
+                    anuncios_arquivos aa ON aa.anuncio_id = an.id 
+                WHERE 
+                    an.status LIKE 'ativo'";
         return $this->consulta($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
