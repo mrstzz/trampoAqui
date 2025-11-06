@@ -11,6 +11,7 @@ class Cliente extends Conexao{
     var $id;
     var $nome;
     var $email;
+    var $data_nascimento;
     var $senha;
     var $telefone;
     var $cpf;
@@ -27,7 +28,7 @@ class Cliente extends Conexao{
         return password_hash($senha, PASSWORD_DEFAULT);
     }
 
-    function insereCliente($nome, $email, $senha, $telefone, $cpf, $criado_em){
+    function insereCliente($nome, $email, $data_nascimento, $senha, $telefone, $cpf, $criado_em){
         if(!empty($nome)){
             $this->nome = $nome;
         }
@@ -42,6 +43,7 @@ class Cliente extends Conexao{
         $sql = "INSERT INTO clientes (
             nome,
             email,
+            data_nascimento,
             senha,
             telefone,
             cpf,
@@ -49,6 +51,7 @@ class Cliente extends Conexao{
         ) VALUES (
             :nome,
             :email,
+            :data_nascimento,
             :senha,
             :telefone,
             :cpf,
@@ -58,6 +61,7 @@ class Cliente extends Conexao{
         $parametros = [
             ':nome' => $nome,
             ':email' => $email,
+            ':data_nascimento' => $data_nascimento,
             ':senha' => $senha,
             ':telefone' => $telefone,
             ':cpf' => $cpf,

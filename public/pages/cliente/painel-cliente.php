@@ -32,7 +32,7 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios();
             <a class="text-xl font-bold text-gray-900">Painel do Cliente</a>
           </div>
           <div class="flex-none">
-            <a href="../../login.php" class="inline-block px-3 py-1 border border-red-500 text-red-500 rounded text-sm font-semibold hover:bg-red-500 hover:text-white transition-colors">
+            <a href="../../auth/logout.php" class="inline-block px-3 py-1 border border-red-500 text-red-500 rounded text-sm font-semibold hover:bg-red-500 hover:text-white transition-colors">
               Sair
             </a>
           </div>
