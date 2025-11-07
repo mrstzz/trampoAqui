@@ -119,6 +119,7 @@
     <footer class="mt-16 bg-gray-800 text-gray-300 text-center p-8">
         &copy; Todos os Direitos Reservados - trampoAqui 2025
     </footer>
+    <?php include_once '../partials/_chat_widget.php' ?>
 
 
     <script>

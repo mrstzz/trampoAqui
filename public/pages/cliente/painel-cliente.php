@@ -10,6 +10,9 @@ if($_SESSION['user_type'] != 'cliente') {
 include_once '../../../vendor/autoload.php'; 
 use Classes\Anuncio;
 
+
+print_r($_SESSION);
+
 $anuncioModel = new Anuncio();
 $anuncios = $anuncioModel->pesquisaTodosAnuncios(); 
 ?>

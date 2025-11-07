@@ -62,14 +62,17 @@
                     </div>
                 </div>
                 <a href="#" class="hidden lg:block text-gray-600 hover:text-indigo-600 font-medium">Torne-se um prestador</a>
-
+                <?php ?>
+                <?php if (!$_SESSION['user_name']){?>
                 <div class="flex items-center space-x-2 border-l pl-4">
                     <a href="../pages/login.php">
-                        <img src="../assets/images/default-user.jpg" alt="Usuário" class="w-10 h-10 rounded-full border-2 border-gray-200 hover:border-indigo-600">
+                        <img src="../icons/user-circle-check.svg" alt="Usuário" class="">
                     </a>
                     <a href="../pages/login.php" class="hidden md:block text-sm font-semibold text-gray-700">Faça Login</a>
                 </div>
-
+                <?php }else{?>
+                    <li>Bem vindo <? echo htmlspecialchars($_SESSION['user_name']); ?></li>
+                <?php }?>
                 <button class="lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
