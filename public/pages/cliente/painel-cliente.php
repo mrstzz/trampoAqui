@@ -11,14 +11,14 @@ include_once '../../../vendor/autoload.php';
 use Classes\Anuncio;
 
 
-print_r($_SESSION);
+// print_r($_SESSION);
 
 $anuncioModel = new Anuncio();
 $anuncios = $anuncioModel->pesquisaTodosAnuncios();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
-
+<?php include_once '../../../partials/_header.php';?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

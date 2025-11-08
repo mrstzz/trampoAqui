@@ -60,11 +60,13 @@ $selectedUf = $old_input['estado'] ?? '';
         <div class="bg-white rounded-xl shadow-2xl overflow-hidden w-full max-w-6xl">
             <div class="flex flex-col md:flex-row">
 
-                <div class="w-full md:w-7/12 p-6 md:p-10 overflow-y-auto">
-                    <form action="/auth/registerSubmit.php" method="POST" class="space-y-4">
+                    <div class="w-full md:w-7/12 p-6 md:p-10 overflow-y-auto">
+                    <form action="../../auth/registerSubmit.php" method="POST" class="space-y-4">
                         
                         <div class="text-center md:text-left mb-6">
-                            <img src="../assets/images/logo-trampo-aqui.png" alt="Logo TrampoAqui" class="w-28 mx-auto md:mx-0">
+                            <a href="../../index.php">
+                                <img src="../../assets/images/logo-trampo-aqui.png" alt="Logo TrampoAqui" class="w-28 mx-auto md:mx-0">
+                            </a>
                         </div>
 
                         <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center md:text-left">Crie sua conta</h2>
@@ -73,7 +75,7 @@ $selectedUf = $old_input['estado'] ?? '';
                             <label for="nome" class="block text-gray-700 text-sm font-semibold mb-2">Nome Completo</label>
                             <input type="text" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
                                 id="nome" name="nome" placeholder="João da Silva"
-                                value="<?= htmlspecialchars($old_input['nome'] ?? '') ?>" required>
+                                value="<?= htmlspecialchars($old_input['nome'] ?? '') ?>">
                             <?php if (isset($errors['nome'])): ?>
                                 <div class="text-red-500 text-xs mt-1"><?= $errors['nome'] ?></div>
                             <?php endif; ?>
@@ -83,7 +85,7 @@ $selectedUf = $old_input['estado'] ?? '';
                             <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Email</label>
                             <input type="email" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
                                 id="email" name="email" placeholder="seu.email@example.com"
-                                value="<?= htmlspecialchars($old_input['email'] ?? '') ?>" required>
+                                value="<?= htmlspecialchars($old_input['email'] ?? '') ?>">
                             <?php if (isset($errors['email'])): ?>
                                 <div class="text-red-500 text-xs mt-1"><?= $errors['email'] ?></div>
                             <?php endif; ?>
@@ -93,7 +95,7 @@ $selectedUf = $old_input['estado'] ?? '';
                             <label for="cpf" class="block text-gray-700 text-sm font-semibold mb-2">CPF</label>
                             <input type="text" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
                                 id="cpf" name="cpf" placeholder="000.000.000-00"
-                                value="<?= htmlspecialchars($old_input['cpf'] ?? '') ?>" required>
+                                value="<?= htmlspecialchars($old_input['cpf'] ?? '') ?>">
                             <?php if (isset($errors['cpf'])): ?>
                                 <div class="text-red-500 text-xs mt-1"><?= $errors['cpf'] ?></div>
                             <?php endif; ?>
@@ -102,7 +104,7 @@ $selectedUf = $old_input['estado'] ?? '';
                             <label for="data_nascimento" class="block text-gray-700 text-sm font-semibold mb-2">Data de Nascimento</label>
                             <input type="date" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
                                 id="data_nascimento" name="data_nascimento" placeholder="dd/mm/aaaa"
-                                value="<?= htmlspecialchars($old_input['data_nascimento'] ?? '') ?>" required>
+                                value="<?= htmlspecialchars($old_input['data_nascimento'] ?? '') ?>">
                             <?php if (isset($errors['data_nascimento'])): ?>
                                 <div class="text-red-500 text-xs mt-1"><?= $errors['data_nascimento'] ?></div>
                             <?php endif; ?>
@@ -112,7 +114,7 @@ $selectedUf = $old_input['estado'] ?? '';
                             <label for="telefone" class="block text-gray-700 text-sm font-semibold mb-2">Telefone</label>
                             <input type="tel" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
                                 id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX"
-                                value="<?= htmlspecialchars($old_input['telefone'] ?? '') ?>" required>
+                                value="<?= htmlspecialchars($old_input['telefone'] ?? '') ?>">
                             <?php if (isset($errors['telefone'])): ?>
                                 <div class="text-red-500 text-xs mt-1"><?= $errors['telefone'] ?></div>
                             <?php endif; ?>
@@ -122,7 +124,7 @@ $selectedUf = $old_input['estado'] ?? '';
                             <div>
                                 <label for="estado" class="block text-gray-700 text-sm font-semibold mb-2">UF</label>
                                 <select class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
-                                    id="estado" name="estado" required>
+                                    id="estado" name="estado">
                                     <option value="">Selecione um estado</option>
                                     <?php foreach ($estados as $uf_abbr => $uf_nome): ?>
                                         <option value="<?= $uf_abbr ?>" <?= ($selectedUf === $uf_abbr) ? 'selected' : '' ?>>
@@ -138,7 +140,7 @@ $selectedUf = $old_input['estado'] ?? '';
                                 <label for="cidade" class="block text-gray-700 text-sm font-semibold mb-2">Cidade</label>
                                 <input type="text" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
                                     id="cidade" name="cidade" placeholder="Digite sua cidade..."
-                                    value="<?= htmlspecialchars($old_input['cidade'] ?? '') ?>" required>
+                                    value="<?= htmlspecialchars($old_input['cidade'] ?? '') ?>">
                                 <?php if (isset($errors['cidade'])): ?>
                                     <div class="text-red-500 text-xs mt-1"><?= $errors['cidade'] ?></div>
                                 <?php endif; ?>
@@ -149,7 +151,7 @@ $selectedUf = $old_input['estado'] ?? '';
                             <div>
                                 <label for="senha" class="block text-gray-700 text-sm font-semibold mb-2">Senha</label>
                                 <input type="password" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
-                                    id="senha" name="senha" placeholder="Digite uma senha..." required>
+                                    id="senha" name="senha" placeholder="Digite uma senha...">
                                 <?php if (isset($errors['senha'])): ?>
                                     <div class="text-red-500 text-xs mt-1"><?= $errors['senha'] ?></div>
                                 <?php endif; ?>
@@ -157,7 +159,7 @@ $selectedUf = $old_input['estado'] ?? '';
                             <div>
                                 <label for="confirma-senha" class="block text-gray-700 text-sm font-semibold mb-2">Confirme sua senha</label>
                                 <input type="password" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
-                                    id="confirma-senha" name="confirma-senha" placeholder="Confirme sua senha..." required>
+                                    id="confirma-senha" name="confirma-senha" placeholder="Confirme sua senha...">
                                 <?php if (isset($errors['senhasDiferentes'])): ?>
                                     <div class="text-red-500 text-xs mt-1"><?= $errors['senhasDiferentes'] ?></div>
                                 <?php endif; ?>
@@ -168,7 +170,7 @@ $selectedUf = $old_input['estado'] ?? '';
                             <div class="flex items-start">
                                 <input type="checkbox" class="form-checkbox h-4 w-4 text-trampo-orange rounded focus:ring-trampo-orange mt-1"
                                     id="terms" name="terms" value="1"
-                                    <?= isset($old_input['terms']) ? 'checked' : '' ?> required>
+                                    <?= isset($old_input['terms']) ? 'checked' : '' ?>>
                                 <label class="ml-2 text-sm text-gray-600" for="terms">Eu concordo com os termos de <a href="privacidade.php" class="text-trampo-blue hover:underline">privacidade</a> do trampoAqui.</label>
                             </div>
                             <?php if (isset($errors['terms'])): ?> 

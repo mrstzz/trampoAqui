@@ -1,4 +1,7 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
     $categorias = [
         'Construção e Reformas' => ['Pedreiro', 'Pintor', 'Eletricista', 'Encanador', 'Gesseiro', 'Serralheiro', 'Marceneiro', 'Azuleijista'],
@@ -63,16 +66,20 @@
                 </div>
                 <a href="#" class="hidden lg:block text-gray-600 hover:text-indigo-600 font-medium">Torne-se um prestador</a>
                 <?php ?>
-                <?php if (!$_SESSION['user_name']){?>
+                <?php if (!isset($_SESSION['user_name'])){?>
                 <div class="flex items-center space-x-2 border-l pl-4">
                     <a href="../pages/login.php">
                         <img src="../icons/user-circle-check.svg" alt="Usuário" class="">
                     </a>
-                    <a href="../pages/login.php" class="hidden md:block text-sm font-semibold text-gray-700">Faça Login</a>
+                    <a href="../pages/auth/login.php" class="hidden md:block text-sm font-semibold text-gray-700">Faça Login</a>
                 </div>
                 <?php }else{?>
-                    <li>Bem vindo <? echo htmlspecialchars($_SESSION['user_name']); ?></li>
-                <?php }?>
+                    <div class="flex items-center space-x-2 border-l pl-4">
+                        <span class="text-sm font-semibold text-indigo-600">
+                            Bem-vindo, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!
+                        </span>
+                    </div>
+                <?php } ?>
                 <button class="lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />

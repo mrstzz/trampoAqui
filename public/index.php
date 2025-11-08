@@ -1,4 +1,10 @@
+<?php
+if(!isset($_SESSION)){
+    session_start();
+    $_SESSION['user_name'] = null;
+}
 
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
