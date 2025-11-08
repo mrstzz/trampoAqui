@@ -77,7 +77,7 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
         $_SESSION['errors'] = $errors;
         $_SESSION['old_input'] = $_POST;
         unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha']);
-        header("Location: /pages/registrar.php");
+        header("Location: /pages/auth/registrar.php");
         exit();
     }
 
@@ -86,7 +86,7 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
     if ($senhaHash === false) {
         $_SESSION['flash_error'] = 'E-mail ou senha inválidos.';
-        header("Location: /pages/registrar.php"); // Os dados antigos já estão na sessão
+        header("Location: /pages/auth/registrar.php"); // Os dados antigos já estão na sessão
         exit();
     }
 
@@ -99,6 +99,6 @@ if ($result) {
         exit();
 } else {
     $_SESSION['flash_error'] = $result['message'] ?? 'Erro inesperado ao cadastrar. Tente novamente.';
-        header("Location: /pages/registrar.php"); // Os dados antigos já estão na sessão
+        header("Location: /pages/auth/registrar.php"); // Os dados antigos já estão na sessão
         exit();
 }

@@ -56,7 +56,9 @@ unset($_SESSION['old_input']);
             <form class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md" action="/auth/loginSubmit.php" method="POST">
                 
                 <div class="flex justify-center mb-6">
-                    <img src="../assets/images/logo-trampo-aqui.png" alt="TrampoAqui Logo" class="w-32">
+                    <a href="../../index.php">
+                        <img src="../../assets/images/logo-trampo-aqui.png" alt="TrampoAqui Logo" class="w-32">
+                    </a>
                 </div>
 
                 <div class="mb-4">
