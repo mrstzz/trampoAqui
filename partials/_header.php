@@ -20,7 +20,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
             
             <a href="../index.php">
-                <img src="../assets/images/logo-trampo-aqui.png" alt="trampoAqui Logo" class="h-10"> </a>
+                <img src="../../assets/images/logo-trampo-aqui.png" alt="trampoAqui Logo" class="h-10"> </a>
 
             <div class="hidden md:flex flex-grow max-w-xl mx-4">
                 <form class="search-bar w-full flex" action="../pages/pesquisa-index.php" method="post">
@@ -64,14 +64,16 @@ if (session_status() == PHP_SESSION_NONE) {
                         </div>
                     </div>
                 </div>
-                <a href="#" class="hidden lg:block text-gray-600 hover:text-indigo-600 font-medium">Torne-se um prestador</a>
+                <?php if (!empty($_SESSION['user_name'])):?>
+                    <a href="#" class="hidden lg:block text-gray-600 hover:text-indigo-600 font-medium">Torne-se um prestador</a>
+                <?php endif; ?>
                 <?php ?>
                 <?php if (!isset($_SESSION['user_name'])){?>
                 <div class="flex items-center space-x-2 border-l pl-4">
-                    <a href="../pages/login.php">
+                    <a href="pages/auth/login.php">
                         <img src="../icons/user-circle-check.svg" alt="Usuário" class="">
                     </a>
-                    <a href="../pages/auth/login.php" class="hidden md:block text-sm font-semibold text-gray-700">Faça Login</a>
+                    <a href="pages/auth/login.php" class="hidden md:block text-sm font-semibold text-gray-700">Faça Login</a>
                 </div>
                 <?php }else{?>
                     <div class="flex items-center space-x-2 border-l pl-4">
