@@ -1,0 +1,112 @@
+/* --- Global Styles --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: #f4f7f6; /* Fundo suave */
+    color: #333;
+    margin: 0;
+    /* CENTRALIZAÇÃO PERFEITA */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* --- Container Principal --- */
+.selection-container {
+    text-align: center;
+    max-width: 900px;
+    width: 100%;
+}
+
+.selection-container h1 {
+    font-size: 2.2em;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+}
+
+.selection-container p {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* --- Wrapper dos Cards --- */
+.card-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Espaço entre os cards */
+    flex-wrap: wrap; /* Para garantir que em telas menores eles quebrem a linha */
+}
+
+/* --- Estilo do Card --- */
+.role-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 350px; /* Largura fixa para os cards */
+    text-align: center;
+    border: 1px solid #eee; /* Borda sutil */
+}
+
+.role-card:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.role-card h2 {
+    color: #2c3e50;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.role-card p {
+    color: #7f8c8d;
+    min-height: 40px; /* Garante que os parágrafos tenham altura semelhante */
+    margin-bottom: 25px;
+}
+
+/* --- Icone --- */
+.icon-placeholder {
+    font-size: 4em;
+    margin-bottom: 10px;
+    line-height: 1; /* Alinhamento vertical do emoji */
+}
+
+/* --- Botão --- */
+.role-card button {
+    background-color: #007bff; /* Cor principal (pode ser a cor da sua marca) */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Ocupa a largura total do card */
+}
+
+.role-card button:hover {
+    background-color: #0056b3;
+}
+
+/* --- Responsividade (Opcional, mas recomendado) --- */
+@media (max-width: 768px) {
+    .card-wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .role-card {
+        width: 100%; /* Em telas pequenas, ocupa a largura total */
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+.btn {
+    background-color: rgb(244, 94, 40);
+}
