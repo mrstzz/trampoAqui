@@ -51,7 +51,6 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios();
             <div class="add-btn">
                 <img src="images/add-btn.png" alt="">
             </div>
-
             <h1>Adicionar um Anúncio</h1>
         </div>
 
