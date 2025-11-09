@@ -57,6 +57,7 @@ public function insereComerciante($nome, $email, $data_nascimento, $senha, $tele
         ':cpf' => $cpf,
         ':criado_em' => $criado_em
     ];
+    
 
     try {
         $this->consulta($sql, $parametros);

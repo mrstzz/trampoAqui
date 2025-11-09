@@ -26,13 +26,11 @@ class Cliente extends Conexao{
         return password_hash($senha, PASSWORD_DEFAULT);
     }
 
-    function insereCliente($nome, $email, $data_nascimento, $senha, $telefone, $cpf, $criado_em){
+    function insereCliente($nome, $email, $data_nascimento, $senha, $telefone, $cpf, $criado_em = NULL ){
         if(!empty($nome)){
             $this->nome = $nome;
         }
-        if(empty($criado_em)){
-            $criado_em = date('Y-m-d H:i:s');
-        }
+      
         if(!empty($email)){
             $this->email = $email;
         }

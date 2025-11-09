@@ -93,18 +93,18 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
 
 //aqui vou colocar a conddicional para ver se é cliente ou comerciante
 if($perfil === 'Comerciante'){
-    $result = $comerciante->insereComerciante($nome, $email, $data_nascimento, $senha, $telefone, $cpf, date('d-m-Y H:i:s')); 
+    $result = $comerciante->insereComerciante($nome, $email, $data_nascimento, $senha, $telefone, $cpf); 
 } else {
-$result = $cliente->insereCliente($nome, $email, $data_nascimento, $senha, $telefone, $cpf, date('d-m-Y H:i:s')); 
+$result = $cliente->insereCliente($nome, $email, $data_nascimento, $senha, $telefone, $cpf); 
 }
 
 if ($result) {
         unset($_SESSION['old_input']); // Limpa dados antigos em caso de sucesso
         $_SESSION['success'] = 'Cadastro realizado com sucesso! Faça o login.';
-        header("Location: /pages/login.php");
+        header("Location: ../pages/auth/login.php");
         exit();
 } else {
     $_SESSION['flash_error'] = $result['message'] ?? 'Erro inesperado ao cadastrar. Tente novamente.';
-        header("Location: /pages/auth/registrar.php"); // Os dados antigos já estão na sessão
+        header("Location: ../pages/auth/registrar.php"); // Os dados antigos já estão na sessão
         exit();
 }
