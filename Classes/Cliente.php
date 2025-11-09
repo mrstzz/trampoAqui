@@ -26,7 +26,7 @@ class Cliente extends Conexao{
         return password_hash($senha, PASSWORD_DEFAULT);
     }
 
-    function insereCliente($nome, $email, $data_nascimento, $senha, $telefone, $cpf, $criado_em){
+    function insereCliente($nome, $email, $data_nascimento, $senha, $telefone, $cpf, $criado_em = null){
         if(!empty($nome)){
             $this->nome = $nome;
         }

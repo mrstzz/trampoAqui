@@ -93,9 +93,9 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
 
 //aqui vou colocar a conddicional para ver se é cliente ou comerciante
 if($perfil === 'Comerciante'){
-    $result = $comerciante->insereComerciante($nome, $email, $data_nascimento, $senha, $telefone, $cpf, date('d-m-Y H:i:s')); 
+    $result = $comerciante->insereComerciante($nome, $email, $data_nascimento, $senha, $telefone, $cpf); 
 } else {
-$result = $cliente->insereCliente($nome, $email, $data_nascimento, $senha, $telefone, $cpf, date('d-m-Y H:i:s')); 
+$result = $cliente->insereCliente($nome, $email, $data_nascimento, $senha, $telefone, $cpf); 
 }
 
 if ($result) {
