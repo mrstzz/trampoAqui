@@ -69,7 +69,7 @@ $selectedUf = $old_input['estado'] ?? '';
                             </a>
                         </div>
 
-                        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center md:text-left">Crie sua conta</h2>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center md:text-left">Crie sua conta como <strong><?php echo $_SESSION['perfil']?></strong> </h2>
 
                         <div>
                             <label for="nome" class="block text-gray-700 text-sm font-semibold mb-2">Nome Completo</label>
@@ -92,7 +92,7 @@ $selectedUf = $old_input['estado'] ?? '';
                         </div>
 
                         <div>
-                            <label for="cpf" class="block text-gray-700 text-sm font-semibold mb-2">CPF</label>
+                            <label for="cpf" class="block text-gray-700 text-sm font-semibold mb-2">CPF ou CNPJ</label>
                             <input type="text" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-trampo-orange"
                                 id="cpf" name="cpf" placeholder="000.000.000-00"
                                 value="<?= htmlspecialchars($old_input['cpf'] ?? '') ?>">
@@ -183,7 +183,7 @@ $selectedUf = $old_input['estado'] ?? '';
 
                         <button type="submit"
                             class="w-full bg-trampo-blue text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-trampo-blue focus:ring-offset-2 !mt-6">
-                            Finalizar Cadastro
+                            Seguir com cadastro
                         </button>
                         
                         <p class="text-center text-sm text-gray-600 !mt-4">Já tem uma conta? <a href="login.php" class="text-trampo-blue hover:underline">Faça login</a></p>

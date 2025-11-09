@@ -23,54 +23,54 @@ class Comerciante extends Conexao{
 		parent::__construct();
 	}
 
-    function insereComerciante(){
-        if(!empty($nome)){
-            $this->nome = $nome;
-        }
-        if(empty($criado_em)){
-            $criado_em = date('Y-m-d H:i:s');
-        }
-
-        $sql = "INSERT INTO comerciantes (
-            nome,
-            email,
-            senha,
-            telefone,
-            cpf,
-            criado_em
-        ) VALUES (
-            :nome,
-            :email,
-            :senha,
-            :telefone,
-            :cpf,
-            :criado_em
-        )";
-
-        $parametros = [
-            ':nome' => $this->nome,
-            ':email' => $this->email,
-            ':senha' => password_hash($this->senha, PASSWORD_DEFAULT),
-            ':telefone' => $this->telefone,
-            ':cpf' => $this->cpf,
-            ':criado_em' => $this->criado_em
-        ];
-
-        try{
-            $this->consulta($sql, $parametros);
-            $insertId = $this->getInsertId();
-            return [
-                'success' => true,
-                'id' => $insertId
-            ];
-        }catch(PDOException $e){
-            return [
-                'success' => false,
-                'error' => $e->getMessage()
-            ];
-        }
+public function insereComerciante($nome, $email, $data_nascimento, $senha, $telefone, $cpf, $criado_em = null)
+{
+    if (empty($criado_em)) {
+        $criado_em = date('Y-m-d H:i:s');
     }
 
+    $sql = "INSERT INTO comerciantes (
+                nome,
+                email,
+                data_nascimento,
+                senha,
+                telefone,
+                cpf,
+                criado_em
+            ) VALUES (
+                :nome,
+                :email,
+                :data_nascimento,
+                :senha,
+                :telefone,
+                :cpf,
+                :criado_em
+            )";
+
+    $parametros = [
+        ':nome' => $nome,
+        ':email' => $email,
+        ':data_nascimento' => $data_nascimento,
+        ':senha' => password_hash($senha, PASSWORD_DEFAULT),
+        ':telefone' => $telefone,
+        ':cpf' => $cpf,
+        ':criado_em' => $criado_em
+    ];
+
+    try {
+        $this->consulta($sql, $parametros);
+        $insertId = $this->getInsertId();
+        return [
+            'success' => true,
+            'id' => $insertId
+        ];
+    } catch (PDOException $e) {
+        return [
+            'success' => false,
+            'error' => $e->getMessage()
+        ];
+    }
+}
 
     function removeComerciante ($id){
         $sql = 'DELETE * FROM comerciantes WHERE id = :id LIMIT 1';

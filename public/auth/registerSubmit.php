@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $nome = trim($_POST['nome'] ?? '');
 $email = trim($_POST['email'] ?? '');
 $data_nascimento = $_POST['data_nascimento'];
+//pegará o cpf ou cnpj conforme escolha do usuario. Mas chamemos universalmente de cpf
 $cpf = trim($_POST['cpf'] ?? '');
 $telefone = trim($_POST['telefone'] ?? '');
 $uf = trim($_POST['estado'] ?? '');
@@ -25,6 +26,7 @@ $cidade = trim($_POST['cidade'] ?? '');
 $senha = $_POST['senha'] ?? '';
 $confirmaSenha = $_POST['confirma-senha'] ?? '';
 $termos = isset($_POST['terms']); // Checkbox
+$perfil = $_POST['perfil'] ?? '';
 
 // print_r($_POST);die;
 
@@ -90,7 +92,12 @@ $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
         exit();
     }
 
+//aqui vou colocar a conddicional para ver se é cliente ou comerciante
+if($_POST['perfil'] === 'Comerciante'){
+    $result = $comerciante->insereComerciante($nome, $email, $data_nascimento, $senhaHash, $telefone, $cpf, date('d-m-Y H:i:s')); 
+} else {
 $result = $cliente->insereCliente($nome, $email, $data_nascimento, $senhaHash, $telefone, $cpf, date('d-m-Y H:i:s')); 
+}
 
 if ($result) {
         unset($_SESSION['old_input']); // Limpa dados antigos em caso de sucesso
