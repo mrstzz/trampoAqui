@@ -4,6 +4,22 @@ if(!isset($_SESSION)){
     $_SESSION['user_name'] = null;
 }
 
+include_once '../vendor/autoload.php';
+use Classes\Anuncio;
+
+$categorias_destaque = [
+            ['nome' => 'Construção e Reformas', 'img' => 'https://plus.unsplash.com/premium_photo-1681691423422-bcaa3eaad7e8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170', 'link' => '#'],
+            ['nome' => 'Aulas e Consultorias', 'img' => 'https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop', 'link' => '#'],
+            ['nome' => 'Limpeza e Conservação', 'img' => 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=2070&auto=format&fit=crop', 'link' => '#'],
+            ['nome' => 'Design e UI UX Design', 'img' => 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop', 'link' => '#'],
+            ['nome' => 'Técnico de Informática', 'img' => 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop', 'link' => '#'],
+            ['nome' => 'ㅤㅤSaúde eㅤㅤㅤ Bem-estar', 'img' => 'https://images.unsplash.com/photo-1477332552946-cfb384aeaf1c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170', 'link' => '#']
+             
+        ];
+
+$anuncioModel = new Anuncio();
+$anuncios = $anuncioModel->pesquisaTodosAnuncios();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -51,46 +67,124 @@ if(!isset($_SESSION)){
         </section>
 
         <section class="mt-16">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Serviços em Destaque</h2>
+
+        <h2 class="text-3xl font-bold mb-6 text-gray-800 mt-12">Categorias em destaque</h2>
+
+        <div class="swiper categorias-carousel overflow-hidden relative pb-10 md:pb-12">
             
-            <div class="swiper popular-services">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide bg-white rounded-lg shadow-lg overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=2070&auto=format&fit=crop" alt="Limpeza" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-semibold text-lg">Limpeza e Diaristas</h3>
-                        </div>
+            <div class="swiper-wrapper">
+
+                <?php foreach ($categorias_destaque as $categoria): ?>
+                    <div class="swiper-slide h-auto p-2">
+                        <a href="<?= htmlspecialchars($categoria['link']); ?>" 
+                           class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1 group">
+                            
+                            <div class="h-40 overflow-hidden">
+                                <img src="<?= htmlspecialchars($categoria['img']); ?>" alt="<?= htmlspecialchars($categoria['nome']); ?>" 
+                                     class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                            </div>
+                            <div class="p-4 text-center">
+                                <h3 class="text-lg font-semibold text-gray-800"><?= htmlspecialchars($categoria['nome']); ?></h3>
+                            </div>
+                        </a>
                     </div>
-                    <div class="swiper-slide bg-white rounded-lg shadow-lg overflow-hidden">
-                        <img src="https://plus.unsplash.com/premium_photo-1681691423422-bcaa3eaad7e8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="Reformas" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-semibold text-lg">Reformas e Reparos</h3>
+                <?php endforeach; ?>
+
+            </div> <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+        </div>
+        
+        
+        
+        <h1 class="text-3xl font-bold mb-6 text-gray-800 mt-12">Anúncios Recentes</h1>
+
+        <div class="swiper anuncios-carousel overflow-hidden relative pb-10 md:pb-12">
+
+            <div class="swiper-wrapper">
+
+                <?php foreach ($anuncios as $value): ?>
+
+                    <div class="swiper-slide h-auto p-2">
+                        
+                        <div class="bg-white rounded-lg shadow-xl overflow-hidden transition-transform hover:shadow-2xl hover:-translate-y-1 flex flex-col">
+
+                            <div class="h-48 flex-shrink-0">
+                                <img src="https://sintricomb.com.br/wp-content/uploads/2018/12/curso.jpg" alt="Imagem do Anúncio"
+                                    class="w-full h-full object-cover" />
+                            </div>
+
+                            <div class="p-6 flex flex-col flex-grow">
+
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="flex-shrink-0">
+                                        <img src="default-user.jpg" alt="Avatar do comerciante"
+                                            class="w-12 h-12 rounded-full ring-2 ring-orange-600 ring-offset-2" />
+                                    </div>
+                                    <div>
+                                        <h2 class="text-lg font-bold text-gray-900"><?= htmlspecialchars($value['nome']); ?>, 22
+                                        </h2>
+                                        <p class="text-sm text-gray-600"><?= htmlspecialchars($value['localidade']); ?></p>
+                                    </div>
+                                </div>
+
+                                <h3 class="font-semibold text-gray-800">Descrição do Anúncio:</h3>
+                                <p class="text-gray-700 mb-4 text-sm h-20 overflow-y-auto">
+                                    <?= htmlspecialchars($value['descricao']); ?>
+                                </p>
+
+                                <div class="mb-4">
+                                    <span class="font-bold text-sm text-gray-800">Categoria:</span>
+                                    <span
+                                        class="ml-2 inline-block px-3 py-1 text-xs font-semibold text-orange-600 border border-orange-600 rounded-full">
+                                        <?= htmlspecialchars($value['categoria']); ?>
+                                    </span>
+                                </div>
+
+                                <div class="mb-4 p-4 bg-gray-100 rounded-lg text-center">
+                                    <span class="text-xs uppercase font-semibold text-gray-600">Valor do Serviço</span>
+                                    <div class="text-3xl font-bold text-orange-600">
+                                        R$ <?= htmlspecialchars($value['valor']); ?>
+                                        <span class="text-lg font-normal text-gray-600">/diária</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-end items-center mt-auto gap-2">
+                                    <button
+                                        class="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-orange-600 transition-colors"
+                                        aria-label="Favoritar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                        </svg>
+                                    </button>
+
+                                    <form action="#" method="post" class="inline">
+                                        <button type="submit"
+                                            class="inline-block px-5 py-2 bg-orange-600 text-white font-semibold rounded-lg shadow-md hover:bg-orange-700 transition-colors">
+                                            Contratar
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide bg-white rounded-lg shadow-lg overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="Aulas" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-semibold text-lg">Aulas e Consultorias</h3>
-                        </div>
-                    </div>
-                    <div class="swiper-slide bg-white rounded-lg shadow-lg overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop" alt="TI" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-semibold text-lg">Técnico de Informática</h3>
-                        </div>
-                    </div>
-                    <div class="swiper-slide bg-white rounded-lg shadow-lg overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1477332552946-cfb384aeaf1c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="Saúde" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-semibold text-lg">Saúde e Bem-estar</h3>
-                        </div>
-                    </div>
+
+                    </div> <?php endforeach; ?>
+
+            </div> <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+        </div> <?php if (empty($anuncios)): ?>
+            <div class="bg-white rounded-lg shadow-md mt-6 text-center p-16">
+                <div class="max-w-md mx-auto">
+                    <h1 class="text-3xl font-bold text-gray-800">Nenhum anúncio encontrado.</h1>
+                    <p class="py-6 text-gray-600">Volte mais tarde para ver as novidades!</p>
                 </div>
-                <div class="swiper-pagination mt-4"></div>
-                
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
             </div>
+        <?php endif; ?>
         </section>
 
         <section class="mt-16 bg-white rounded-lg shadow-lg p-10">
@@ -129,44 +223,74 @@ if(!isset($_SESSION)){
 
 
     <script>
-        const swiper = new Swiper('.popular-services', {
-            // Quantidade de slides por view
+        // CARROSSEL DE ANÚNCIOS 
+        const swiperAnuncios = new Swiper('.anuncios-carousel', {
             slidesPerView: 1,
-            spaceBetween: 20, // Espaço entre os slides
+            spaceBetween: 20,
+            autoHeight: true,
+            loop: true,
 
-            // Breakpoints responsivos
             breakpoints: {
-                // >= 640px
-                640: {
+                768: { // 'md'
                     slidesPerView: 2,
                     spaceBetween: 20,
                 },
-                // >= 1024px
-                1024: {
-                    slidesPerView: 4,
+                1024: { // 'lg'
+                    slidesPerView: 3,
                     spaceBetween: 30,
                 },
             },
 
-            // Loop
-            loop: true,
-
-            // Autoplay (carrossel "passando sozinho")
             autoplay: {
-                delay: 3000, // 3 segundos
+                delay: 3500,
                 disableOnInteraction: false,
             },
 
-            // Paginação (bolinhas)
             pagination: {
-                el: '.swiper-pagination',
+                el: '.anuncios-carousel .swiper-pagination',
                 clickable: true,
             },
-
-            // Navegação (setas)
             navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                nextEl: '.anuncios-carousel .swiper-button-next',
+                prevEl: '.anuncios-carousel .swiper-button-prev',
+            },
+        });
+
+
+        // CARROSSEL DE CATEGORIAS
+        const swiperCategorias = new Swiper('.categorias-carousel', {
+            slidesPerView: 2, // 2 no mobile
+            spaceBetween: 20,
+            loop: true,
+            autoHeight: true,
+
+            breakpoints: {
+                640: { // 'sm'
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                768: { // 'md'
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                },
+                1024: { // 'lg'
+                    slidesPerView: 6,
+                    spaceBetween: 30,
+                },
+            },
+
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+
+            pagination: {
+                el: '.categorias-carousel .swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.categorias-carousel .swiper-button-next',
+                prevEl: '.categorias-carousel .swiper-button-prev',
             },
         });
     </script>

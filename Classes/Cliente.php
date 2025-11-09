@@ -8,16 +8,14 @@ use PDOException;
 
 class Cliente extends Conexao{
 
-    var $id;
-    var $nome;
-    var $email;
-    var $data_nascimento;
-    var $senha;
-    var $telefone;
-    var $cpf;
-    var $criado_em;
-
-    private Conexao $pdo;
+    public $id;
+    public $nome;
+    public $email;
+    public $data_nascimento;
+    public $senha;
+    public $telefone;
+    public $cpf;
+    public $criado_em;
 
 
     function __construct() {
