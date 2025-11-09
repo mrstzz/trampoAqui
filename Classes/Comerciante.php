@@ -6,18 +6,18 @@ use Classes\Conexao;
 use PDOException;
 
 class Comerciante extends Conexao{
-    var $id;
-    var $status;
-    var $plano;
-    var $plano_expira_em;
-    var $nome;
-    var $email;
-    var $data_nascimento;
-    var $senha;
-    var $cpf;
-    var $telefone;
-    var $criado_em;
-    var $atualizado_em;
+
+    public $id;
+    public $status;
+    public $plano;
+    public $plano_expira_em;
+    public $nome;
+    public $email;
+    public $senha;
+    public $cpf;
+    public $telefone;
+    public $criado_em;
+    public $atualizado_em;
 
     function __construct() {
 		parent::__construct();
@@ -183,5 +183,14 @@ public function insereComerciante($nome, $email, $data_nascimento, $senha, $tele
             ];
         }
     }
+
+
+    public function atualizaFotoPerfiç($comercId) {
+        // Remove o status 'perfil' da foto antiga, se houver
+        $sql = "UPDATE comerciante_fotos SET tipo = 'galeria' WHERE comerc_id = $comercId AND tipo = 'perfil'";
+        $result = $this->consulta($sql);
+        
+    }
+    
 
 }

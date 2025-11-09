@@ -7,9 +7,9 @@ class Anuncio extends Conexao {
         parent::__construct();
     }
 
-    public function create($titulo, $descricao, $valor, $localidade, $comerciante_id, $status = 'ativo', $arquivo = null) {
-        $sql = "INSERT INTO anuncios (titulo, descricao, valor, localidade, comerciante_id, status, arquivo) 
-                VALUES (:titulo, :descricao, :valor, :localidade, :comerciante_id, :status, :arquivo)";
+    public function create($titulo, $descricao, $valor, $localidade, $comerciante_id, $status = 'ativo', $arquivo = null, $categoria = NULL) {
+        $sql = "INSERT INTO anuncios (titulo, descricao, valor, localidade, comerciante_id, status, arquivo, categoria,ciado_em) 
+                VALUES (:titulo, :descricao, :valor, :localidade, :comerciante_id, :status, :arquivo, :categoria, :criado_em)";
         
         $params = [
             ':titulo' => $titulo,
@@ -18,7 +18,8 @@ class Anuncio extends Conexao {
             ':localidade' => $localidade,
             ':comerciante_id' => $comerciante_id,
             ':status' => $status,
-            ':arquivo' => $arquivo
+            ':arquivo' => $arquivo,
+            ':categoria' => $categoria,
         ];
 
         return $this->consulta($sql, $params);
@@ -48,7 +49,8 @@ class Anuncio extends Conexao {
         return $this->consulta($sql, $params);
     }
 
-    public function pesquisaTodosAnuncios() {
+    public function pesquisaTodosAnuncios($carrossel = NULL) {
+        $cond = ($carrossel) ? 'ORDER BY an.criado_em LIMIT 10': '';
         $sql = "SELECT 
                     an.*,
                     aa.*,
@@ -61,7 +63,9 @@ class Anuncio extends Conexao {
                 LEFT JOIN 
                     anuncios_arquivos aa ON aa.anuncio_id = an.id 
                 WHERE 
-                    an.status LIKE 'ativo'";
+                    an.status LIKE 'ativo'
+                $cond";
+        print_r($sql);
         return $this->consulta($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 

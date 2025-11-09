@@ -19,8 +19,8 @@ if (session_status() == PHP_SESSION_NONE) {
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
             
-            <a href="#">
-                <img src="../../assets/images/logo-trampo-aqui.png" alt="trampoAqui Logo" class="h-10"> </a>
+            <a href="index.php">
+                <img src="../assets/images/logo-trampo-aqui.png" alt="trampoAqui Logo" class="h-10"> </a>
 
             <div class="hidden md:flex flex-grow max-w-xl mx-4">
                 <form class="search-bar w-full flex" action="../pages/pesquisa-index.php" method="post">
