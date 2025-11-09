@@ -85,7 +85,7 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
 
 // --- Criação do Cliente ---
 // Hash da senha ANTES de passar para o Model
-    if ($senhaHash === false) {
+    if ($senha === false) {
         $_SESSION['flash_error'] = 'E-mail ou senha inválidos.';
         header("Location: /pages/auth/registrar.php"); // Os dados antigos já estão na sessão
         exit();
