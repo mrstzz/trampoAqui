@@ -85,7 +85,6 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
 
 // --- Criação do Cliente ---
 // Hash da senha ANTES de passar para o Model
-$senhaHash = password_hash($senha, PASSWORD_DEFAULT);
     if ($senhaHash === false) {
         $_SESSION['flash_error'] = 'E-mail ou senha inválidos.';
         header("Location: /pages/auth/registrar.php"); // Os dados antigos já estão na sessão
@@ -94,9 +93,9 @@ $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
 //aqui vou colocar a conddicional para ver se é cliente ou comerciante
 if($perfil === 'Comerciante'){
-    $result = $comerciante->insereComerciante($nome, $email, $data_nascimento, $senhaHash, $telefone, $cpf, date('d-m-Y H:i:s')); 
+    $result = $comerciante->insereComerciante($nome, $email, $data_nascimento, $senha, $telefone, $cpf, date('d-m-Y H:i:s')); 
 } else {
-$result = $cliente->insereCliente($nome, $email, $data_nascimento, $senhaHash, $telefone, $cpf, date('d-m-Y H:i:s')); 
+$result = $cliente->insereCliente($nome, $email, $data_nascimento, $senha, $telefone, $cpf, date('d-m-Y H:i:s')); 
 }
 
 if ($result) {

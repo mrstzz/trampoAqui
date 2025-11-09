@@ -30,7 +30,7 @@ $selectedUf = $old_input['estado'] ?? '';
     <title>Cadastre-se - trampoAqui</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <link rel="shortcut icon" href="../../assets/images/logo-trampo-aqui-white-new50.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     

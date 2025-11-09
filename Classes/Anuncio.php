@@ -65,7 +65,7 @@ class Anuncio extends Conexao {
                 WHERE 
                     an.status LIKE 'ativo'
                 $cond";
-        print_r($sql);
+        // print_r($sql);
         return $this->consulta($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 

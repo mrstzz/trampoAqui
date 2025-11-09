@@ -28,6 +28,7 @@ public function insereComerciante($nome, $email, $data_nascimento, $senha, $tele
     if (empty($criado_em)) {
         $criado_em = date('Y-m-d H:i:s');
     }
+    $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO comerciantes (
                 nome,
@@ -51,7 +52,7 @@ public function insereComerciante($nome, $email, $data_nascimento, $senha, $tele
         ':nome' => $nome,
         ':email' => $email,
         ':data_nascimento' => $data_nascimento,
-        ':senha' => password_hash($senha, PASSWORD_DEFAULT),
+        ':senha' => $senhaHash,
         ':telefone' => $telefone,
         ':cpf' => $cpf,
         ':criado_em' => $criado_em

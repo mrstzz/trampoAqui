@@ -32,7 +32,7 @@ $comerciante = new Comerciante();
 
 if ($tipo == 'cliente') {
     $busca = $cliente->pesquisaCliente(false, $pesquisa);
-} else if ($tipo == 'prestador') {
+} else if ($tipo == 'comerciante') {
     $busca = $comerciante->pesquisaComerciante(false, $pesquisa);
 } else if ($tipo == 'anuncio') {
     // $anuncio = new Anuncio();
