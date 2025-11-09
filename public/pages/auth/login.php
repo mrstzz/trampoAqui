@@ -89,6 +89,11 @@ unset($_SESSION['old_input']);
                         <?= $errors['input'] ?>
                     </div>
                 <?php endif; ?>
+                <?php if (isset($_SESSION['success'])): ?> 
+                    <div class="text-green-500 text-sm mb-4 text-center font-medium">
+                        <?= $_SESSION['success'] ?>
+                    </div>
+                <?php endif; ?>
 
                 <button 
                     type="submit"
@@ -98,7 +103,7 @@ unset($_SESSION['old_input']);
                 </button>
                 
                 <div class="text-center mt-6">
-                    <a href="registrar.php" class="text-sm text-trampo-blue hover:text-blue-800 transition-colors">
+                    <a href="cliente_comerciante.php" class="text-sm text-trampo-blue hover:text-blue-800 transition-colors">
                         Criar uma Conta
                     </a>
                 </div>

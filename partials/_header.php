@@ -19,7 +19,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
             
-            <a href="../index.php">
+            <a href="#">
                 <img src="../../assets/images/logo-trampo-aqui.png" alt="trampoAqui Logo" class="h-10"> </a>
 
             <div class="hidden md:flex flex-grow max-w-xl mx-4">
@@ -64,10 +64,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         </div>
                     </div>
                 </div>
-                <?php if (!empty($_SESSION['user_name'])):?>
-                    <a href="#" class="hidden lg:block text-gray-600 hover:text-indigo-600 font-medium">Torne-se um prestador</a>
-                <?php endif; ?>
-                <?php ?>
+
                 <?php if (!isset($_SESSION['user_name'])){?>
                 <div class="flex items-center space-x-2 border-l pl-4">
                     <a href="pages/auth/login.php">
