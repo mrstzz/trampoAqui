@@ -15,7 +15,7 @@ if (session_status() == PHP_SESSION_NONE) {
         'Educação' => ['Professor Particular', 'Aulas de Dança', 'Aulas de Informática', 'Cursos Profissionalizantes']
     ];
     ?>
-
+    <link rel="shortcut icon" href="../../assets/images/logo-trampo-aqui-white-new50.png" type="image/x-icon">
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
             
@@ -27,7 +27,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <input type="text" name="pesquisa" placeholder="Pesquise aqui..." class="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
                     <select name="tipo" class="px-3 py-2 border-t border-b border-gray-300 bg-gray-50 focus:outline-none">
                         <option value="anuncio">Anúncio</option>
-                        <option value="prestador">Prestador</option>
+                        <option value="comerciante">Comerciante</option>
                         <option value="cliente">Cliente</option>
                         <option value="tags">Tags</option>
                     </select>

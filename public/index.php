@@ -37,6 +37,7 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios();
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="shortcut icon" href="assets/images/logo-trampo-aqui-white-new50.png" type="image/x-icon">
 
     <style>
         body {

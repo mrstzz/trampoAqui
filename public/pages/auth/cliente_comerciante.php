@@ -11,6 +11,7 @@ session_start();
     <link rel="stylesheet" href="../../assets/css/cliente_comerciante.css">
     </head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../../assets/images/logo-trampo-aqui-white-new50.png" type="image/x-icon">
 <body>
 
     <div class="selection-container">
@@ -42,7 +43,7 @@ session_start();
 
             
         </div>
-            <button class="btn bg-primary py-2 mt-5 d-block mx-auto px-5"><a href="../../pages/auth/login.php" class="text-decoration-none text-light">Cancelar Cadastro</a></button>
+            <button class="btn bg-dark py-2 mt-5 d-block mx-auto px-5"><a href="../../pages/auth/login.php" class="text-decoration-none text-light">Cancelar Cadastro</a></button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
