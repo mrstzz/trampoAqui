@@ -1,10 +1,11 @@
 <?php
-if(!isset($_SESSION)){
+
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
-    $_SESSION['user_name'] = null;
 }
 
 include_once '../vendor/autoload.php';
+include_once './functions.php';
 use Classes\Anuncio;
 
 $categorias_destaque = [
@@ -18,7 +19,8 @@ $categorias_destaque = [
         ];
 
 $anuncioModel = new Anuncio();
-$anuncios = $anuncioModel->pesquisaTodosAnuncios();
+$carrossel = '1';
+$anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
 
 ?>
 <!DOCTYPE html>
@@ -105,48 +107,53 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios();
 
             <div class="swiper-wrapper">
 
-                <?php foreach ($anuncios as $value): ?>
-
+                <?php foreach ($anuncios as $key => $value): ?>
                     <div class="swiper-slide h-auto p-2">
                         
                         <div class="bg-white rounded-lg shadow-xl overflow-hidden transition-transform hover:shadow-2xl hover:-translate-y-1 flex flex-col">
-
-                            <div class="h-48 flex-shrink-0">
-                                <img src="https://sintricomb.com.br/wp-content/uploads/2018/12/curso.jpg" alt="Imagem do Anúncio"
-                                    class="w-full h-full object-cover" />
-                            </div>
+                            
+                            <?php if (!empty($value->caminho_arquivo)): ?>
+                                <div class="h-48 flex-shrink-0">
+                                    <img src="./uploads/<?= htmlspecialchars($value->caminho_arquivo);?>" alt="Imagem do Anúncio"
+                                        class="w-full h-full object-cover" />
+                                </div>
+                            <?php else:?>
+                                <div class="h-48 flex-shrink-0">
+                                    <img src="./assets/images/semImagem.png" alt="Imagem do Anúncio" class="w-full h-full object-cover" />
+                                </div>
+                            <?php endif?>
 
                             <div class="p-6 flex flex-col flex-grow">
 
                                 <div class="flex items-center gap-4 mb-4">
                                     <div class="flex-shrink-0">
-                                        <img src="default-user.jpg" alt="Avatar do comerciante"
+                                        <img src="./icons/user-default.svg" alt="Avatar do comerciante"
                                             class="w-12 h-12 rounded-full ring-2 ring-orange-600 ring-offset-2" />
                                     </div>
                                     <div>
-                                        <h2 class="text-lg font-bold text-gray-900"><?= htmlspecialchars($value['nome']); ?>, 22
+                                        <h2 class="text-lg font-bold text-gray-900"><?= htmlspecialchars($value->nome); ?>, 22
                                         </h2>
-                                        <p class="text-sm text-gray-600"><?= htmlspecialchars($value['localidade']); ?></p>
+                                        <p class="text-sm text-gray-600"><?= htmlspecialchars($value->localidade); ?></p>
                                     </div>
                                 </div>
 
                                 <h3 class="font-semibold text-gray-800">Descrição do Anúncio:</h3>
                                 <p class="text-gray-700 mb-4 text-sm h-20 overflow-y-auto">
-                                    <?= htmlspecialchars($value['descricao']); ?>
+                                    <?= htmlspecialchars($value->descricao); ?>
                                 </p>
 
                                 <div class="mb-4">
                                     <span class="font-bold text-sm text-gray-800">Categoria:</span>
                                     <span
                                         class="ml-2 inline-block px-3 py-1 text-xs font-semibold text-orange-600 border border-orange-600 rounded-full">
-                                        <?= htmlspecialchars($value['categoria']); ?>
+                                        <?= htmlspecialchars($value->nomeCategoria); ?>
                                     </span>
                                 </div>
 
                                 <div class="mb-4 p-4 bg-gray-100 rounded-lg text-center">
                                     <span class="text-xs uppercase font-semibold text-gray-600">Valor do Serviço</span>
                                     <div class="text-3xl font-bold text-orange-600">
-                                        R$ <?= htmlspecialchars($value['valor']); ?>
+                                        R$ <?= htmlspecialchars($value->valor); ?>
                                         <span class="text-lg font-normal text-gray-600">/diária</span>
                                     </div>
                                 </div>

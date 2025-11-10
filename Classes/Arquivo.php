@@ -1,5 +1,6 @@
 <?php
 
+namespace Classes;
 use Classes\Conexao;
 
 class Arquivo extends Conexao {
@@ -17,9 +18,12 @@ class Arquivo extends Conexao {
 		parent::__construct();
 	}
 
-    function insereArquivo($comercId, $filenome, $tipo = 'galeria') {
-        $sql = "INSERT INTO anuncios_arquivos (anuncio_id, caminho_arquivo, tipo) VALUES ($comercId, $filenome, $tipo)";
-        return $this->consulta($sql);
+    function insereArquivo($anuncioId, $tipo = NULL, $filename) {
+
+        $tipo = ($tipo) ? "$tipo" : "mostruario";
+        $sql = "INSERT INTO anuncios_arquivos (anuncio_id, tipo, caminho_arquivo) VALUES ($anuncioId, '$tipo', '$filename')";
+        $result = $this->consulta($sql);
+        return $result;
     }
 
 

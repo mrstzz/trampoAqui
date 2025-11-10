@@ -23,7 +23,7 @@ class Comerciante extends Conexao{
 		parent::__construct();
 	}
 
-public function insereComerciante($nome, $email, $data_nascimento, $senha, $telefone, $cpf, $criado_em = null)
+public function insereComerciante($nome, $status, $email, $data_nascimento, $senha, $telefone, $cpf, $criado_em = null)
 {
     if (empty($criado_em)) {
         $criado_em = date('Y-m-d H:i:s');
@@ -32,6 +32,7 @@ public function insereComerciante($nome, $email, $data_nascimento, $senha, $tele
 
     $sql = "INSERT INTO comerciantes (
                 nome,
+                status,
                 email,
                 data_nascimento,
                 senha,
@@ -40,6 +41,7 @@ public function insereComerciante($nome, $email, $data_nascimento, $senha, $tele
                 criado_em
             ) VALUES (
                 :nome,
+                :status,
                 :email,
                 :data_nascimento,
                 :senha,
@@ -50,6 +52,7 @@ public function insereComerciante($nome, $email, $data_nascimento, $senha, $tele
 
     $parametros = [
         ':nome' => $nome,
+        ':status' => $status,
         ':email' => $email,
         ':data_nascimento' => $data_nascimento,
         ':senha' => $senhaHash,
@@ -137,13 +140,20 @@ public function insereComerciante($nome, $email, $data_nascimento, $senha, $tele
         }
     }
 
-    function pesquisaComerciante ($id = FALSE, $nome = FALSE){
+    function pesquisaComerciante ($id = NULL, $nome = NULL){
 
-        $sql = "SELECT * FROM Comerciantes WHERE ";
+        $sql = "SELECT 
+                    id,
+                    status,
+                    nome,
+                    criado_em,
+                    telefone 
+                FROM Comerciantes 
+                WHERE ";
 
         $id = ($id) ? $sql .= "id = $id" : $sql.="nome LIKE '%$nome%'";
 		$res = $this->Consulta($sql);
-		
+
 		if ($res->rowCount() === 0) {
 			return []; 
 		}

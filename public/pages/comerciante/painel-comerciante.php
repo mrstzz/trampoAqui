@@ -1,1 +1,0 @@
-<h1>painel comerciante</h1>

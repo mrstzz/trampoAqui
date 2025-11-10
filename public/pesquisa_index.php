@@ -1,22 +1,21 @@
 <?php
 
+
+
+require_once __DIR__ . '../../vendor/autoload.php';
+require_once  './functions.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
+extract($_POST);
+extract($_GET);
+
+
 use Classes\Cliente;
 use Classes\Comerciante;
-require_once __DIR__ . '../../../vendor/autoload.php';
-
-
-$pesquisa = '';
-$tipo = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Veio do formulário principal (index.php)
-    $pesquisa = $_POST['pesquisa'] ?? '';
-    $tipo = $_POST['tipo'] ?? '';
-} else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pesquisa'])) {
-    // Veio do formulário de re-busca desta página
-    $pesquisa = $_GET['pesquisa'] ?? '';
-    $tipo = $_GET['tipo'] ?? ''; // O tipo é passado via input hidden
-}
 
 
 // Validação
@@ -33,7 +32,7 @@ $comerciante = new Comerciante();
 if ($tipo == 'cliente') {
     $busca = $cliente->pesquisaCliente(false, $pesquisa);
 } else if ($tipo == 'comerciante') {
-    $busca = $comerciante->pesquisaComerciante(false, $pesquisa);
+    $busca = $comerciante->pesquisaComerciante(NULL, $pesquisa);
 } else if ($tipo == 'anuncio') {
     // $anuncio = new Anuncio();
     // $busca = $anuncio->pesquisaAnuncio(false, $pesquisa);
@@ -41,6 +40,7 @@ if ($tipo == 'cliente') {
     // $tag = new Tag();
     // $busca = $tag->pesquisaPorTag($pesquisa);
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ if ($tipo == 'cliente') {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 text-gray-900 antialiased">
-    <?php include_once '../../partials/_header.php'?>
+    <?php include_once '../partials/_header.php'?>
 
 
     <div class="container mx-auto px-4 py-8 max-w-7xl">
@@ -61,24 +61,6 @@ if ($tipo == 'cliente') {
         <p class="text-lg text-gray-600 mb-6">
             Exibindo resultados para "<?=htmlspecialchars($pesquisa)?>" em "<?=htmlspecialchars($tipo)?>"
         </p>
-
-        <form action="" method="GET" class="mb-8">
-            <input type="hidden" name="tipo" value="<?php echo htmlspecialchars($tipo); ?>">
-            
-            <div class="flex">
-                <input type="text" 
-                       name="pesquisa" 
-                       class="w-full px-4 py-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent" 
-                       placeholder="Refinar sua busca..." 
-                       value="<?php echo htmlspecialchars($pesquisa);?>">
-                
-                <button class="flex-shrink-0 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-r-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2" type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
-        </form>
 
         <?php if (!empty($pesquisa)) :?>
             
@@ -98,7 +80,7 @@ if ($tipo == 'cliente') {
                             <h3 class="text-xl font-semibold text-gray-800">
                                 <?php echo htmlspecialchars($item['nome']); ?>
                             </h3>
-                            <p class="text-sm text-indigo-600"><?php echo htmlspecialchars($item['email']); ?></p>
+                            <p class="text-sm text-orange-600">ID: <?php echo htmlspecialchars($item['id']); ?></p>
                         </div>
                         
                         <div class="p-5 text-sm text-gray-600 space-y-3">

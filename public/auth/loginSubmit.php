@@ -1,6 +1,11 @@
 <?php
 require __DIR__ . '../../../vendor/autoload.php';
-session_start();
+require  '../functions.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 
 use Classes\Cliente; 
 use Classes\Comerciante; 
@@ -33,7 +38,7 @@ if ($comerciante && password_verify($senha, $comerciante['senha'])) {
     $_SESSION['user_id'] = $comerciante['id'];
     $_SESSION['user_name'] = $comerciante['nome']; 
     $_SESSION['user_type'] = 'comerciante';
-    header("Location: ../pages/comerciante/painel-comerciante.php");
+    header("Location: ../pages/comerciante/painel_comerciante.php");
     exit();
 }
 
@@ -45,8 +50,7 @@ if ($cliente && password_verify($senha, $cliente['senha'])) {
     $_SESSION['user_name'] = $cliente['nome'];
     $_SESSION['user_email'] = $cliente['email'];
     $_SESSION['user_type'] = 'cliente';
-    print_r($_SESSION);
-    header("Location: ../pages/cliente/painel-cliente.php");
+    header("Location: ../pages/cliente/painel_cliente.php");
     exit();
 }
 

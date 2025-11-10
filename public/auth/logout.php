@@ -19,6 +19,7 @@ if (ini_get("session.use_cookies")) {
 
 // 4. DESTROI A SESSÃO NO SERVIDOR: Remove o arquivo de sessão.
 session_destroy();
+unset($_SESSION );
 
 // 5. REDIRECIONA: Leva o usuário para a tela de login.
 header("Location: ../pages/auth/login.php");

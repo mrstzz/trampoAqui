@@ -1,5 +1,9 @@
 <?php
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once __DIR__ . '../../../vendor/autoload.php';
 
 use Classes\Comerciante;
@@ -27,6 +31,7 @@ $senha = $_POST['senha'] ?? '';
 $confirmaSenha = $_POST['confirma-senha'] ?? '';
 $termos = isset($_POST['terms']); // Checkbox
 $perfil = $_SESSION['perfil'] ?? '';
+$status = 'ativo';
 
 // print_r($_POST);die;
 
@@ -85,7 +90,7 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
 
 // --- Criação do Cliente ---
 // Hash da senha ANTES de passar para o Model
-    if ($senhaHash === false) {
+    if ($senha === false) {
         $_SESSION['flash_error'] = 'E-mail ou senha inválidos.';
         header("Location: /pages/auth/registrar.php"); // Os dados antigos já estão na sessão
         exit();
@@ -93,7 +98,7 @@ unset($_SESSION['old_input']['senha'], $_SESSION['old_input']['confirma-senha'])
 
 //aqui vou colocar a conddicional para ver se é cliente ou comerciante
 if($perfil === 'Comerciante'){
-    $result = $comerciante->insereComerciante($nome, $email, $data_nascimento, $senha, $telefone, $cpf); 
+    $result = $comerciante->insereComerciante($nome,$status, $email, $data_nascimento, $senha, $telefone, $cpf); 
 } else {
 $result = $cliente->insereCliente($nome, $email, $data_nascimento, $senha, $telefone, $cpf); 
 }

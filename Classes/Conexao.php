@@ -4,7 +4,7 @@
 namespace Classes;
 use PDO;
 use PDOException;
-use Exception; // Para lançar exceções
+use Exception;
 
 require_once __DIR__ . '/../vendor/autoload.php'; 
 

@@ -3,7 +3,6 @@
 namespace Classes;
 use PDO;
 use Classes\Conexao;
-use APP\Models\funcoesGlobais;
 use PDOException;
 
 class Cliente extends Conexao{
@@ -143,15 +142,13 @@ class Cliente extends Conexao{
         }
     }
 
-    function pesquisaCliente ($codigo = FALSE, $nome = FALSE){
+    function pesquisaCliente ($id = FALSE, $nome = FALSE){
 
         $sql = "SELECT * FROM clientes WHERE ";
 
-        $codigo = ($codigo) ? $sql .= "codigo = $codigo" : $sql.="nome LIKE '%$nome%'";
+        $id = ($id) ? $sql .= "id = $id" : $sql.="nome LIKE '%$nome%'";
 
-
-		$res = Conexao::consulta($sql);
-		
+		$res = $this->consulta($sql);
 		if ($res->rowCount() === 0) {
 			return []; 
 		}
