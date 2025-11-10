@@ -8,6 +8,19 @@ include_once '../vendor/autoload.php';
 include_once './functions.php';
 use Classes\Anuncio;
 
+
+if (isset($_SESSION['flash_message'])) {
+    $message = $_SESSION['flash_message'];
+    $bgColor = ($message['type'] === 'success') 
+        ? 'bg-green-100 border-green-400 text-green-700' // Sucesso
+        : 'bg-red-100 border-red-400 text-red-700';      // Erro
+
+    echo '<div class="' . $bgColor . ' border px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline">' . htmlspecialchars($message['message']) . '</span>
+          </div>';
+    unset($_SESSION['flash_message']);
+}
+
 $categorias_destaque = [
             ['nome' => 'Construção e Reformas', 'img' => 'https://plus.unsplash.com/premium_photo-1681691423422-bcaa3eaad7e8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170', 'link' => '#'],
             ['nome' => 'Aulas e Consultorias', 'img' => 'https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop', 'link' => '#'],
@@ -169,12 +182,11 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
                                         </svg>
                                     </button>
 
-                                    <form action="#" method="post" class="inline">
-                                        <button type="submit"
-                                            class="inline-block px-5 py-2 bg-orange-600 text-white font-semibold rounded-lg shadow-md hover:bg-orange-700 transition-colors">
-                                            Contratar
-                                        </button>
-                                    </form>
+                                    <button type="button" 
+                                        data-id="<?= htmlspecialchars($value->anuncioID); ?>"
+                                        class="btn-contratar inline-block px-5 py-2 bg-orange-600 text-white font-semibold rounded-lg shadow-md hover:bg-orange-700 transition-colors">
+                                        Contratar
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -229,9 +241,8 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
     </footer>
     <?php include_once '../partials/_chat_widget.php' ?>
 
-
+        
     <script>
-        // CARROSSEL DE ANÚNCIOS 
         const swiperAnuncios = new Swiper('.anuncios-carousel', {
             slidesPerView: 1,
             spaceBetween: 20,
@@ -264,8 +275,6 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
             },
         });
 
-
-        // CARROSSEL DE CATEGORIAS
         const swiperCategorias = new Swiper('.categorias-carousel', {
             slidesPerView: 2, // 2 no mobile
             spaceBetween: 20,
@@ -303,5 +312,25 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
         });
     </script>
 
+
+    <!-- MODAL -->
+    <div id="contratar-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg mx-4 p-6 relative">
+            
+            <button id="modal-close-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <h2 class="text-2xl font-bold mb-4 text-gray-800" id="modal-title">Detalhes do Anúncio</h2>
+            
+            <div id="modal-content-area">
+                <p class="text-center text-gray-600 py-8">Carregando...</p>
+            </div>
+        </div>
+    </div>
+    <script src="./js/ajaxContrata.js"></script>
+
 </body>
+
 </html>

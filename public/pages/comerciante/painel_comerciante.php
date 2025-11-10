@@ -36,6 +36,8 @@ $comerc->pesquisaComerciante($user_id);
 $anuncio = new Anuncio();
 $anunciosAtivos = $anuncio->pesquisarPeloId($user_id);
 
+$categorias = $anuncio->pesquisaTodasCategorias();
+
 
 ?>
 <!DOCTYPE html>
@@ -134,6 +136,29 @@ $anunciosAtivos = $anuncio->pesquisarPeloId($user_id);
                             <label for="imagem" class="block text-sm font-medium text-gray-700 mb-1">Imagem do Anúncio</label>
                             <input type="file" id="imagem" name="imagem" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100">
                         </div>
+
+                        <div class="mt-4">
+
+                        <label for="categoria" class="block text-sm font-medium text-gray-700 mb-1">
+                            Categoria
+                        </label>
+                        
+                        <select id="categoria" name="categoria_id" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            
+                            <option value="">-- Selecione uma Categoria --</option>
+                            
+                            <?php foreach ($categorias as $categoria): ?>
+                                
+                                <option value="<?php echo htmlspecialchars($categoria->id); ?>">
+                                    <?php echo htmlspecialchars($categoria->nome); ?>
+                                </option>
+
+                            <?php endforeach; ?>
+                            
+                        </select>
+                    </div>
+
+
 
                         <div class="text-right">
                             <button type="submit" class="bg-orange-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-orange-600 transition-colors">

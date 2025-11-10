@@ -5,10 +5,11 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+
 extract($_SESSION);
 // pr($_SESSION);
 
-$painel = ($user_type == 'comerciante') ? 'painel_comerciante.php' : 'painel_cliente.php';
+$painel = (@$user_type == 'comerciante') ? 'painel_comerciante.php' : 'painel_cliente.php';
 
 $categorias = [
     'Construção e Reformas' => ['Pedreiro', 'Pintor', 'Eletricista', 'Encanador', 'Gesseiro', 'Serralheiro', 'Marceneiro', 'Azuleijista'],

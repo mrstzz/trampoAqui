@@ -32,8 +32,6 @@ $comerciante  = new Comerciante();
 $arquivo      = new Arquivo();
 
 
-
-
 $paginaDeRetorno = "./painel_comerciante.php";
 
 try {
@@ -48,7 +46,7 @@ try {
         throw new Exception("Falha ao salvar o arquivo no servidor.");
     }
 
-    $insereAnuncio = $anuncioArq->insere($titulo, $descricao,$valor,$localidade,$user_id,'ativo');
+    $insereAnuncio = $anuncioArq->insere($titulo, $descricao,$valor,$localidade,$user_id,'ativo',$categoria_id );
     if (!$insereAnuncio) {
         throw new Exception("Falha ao criar o anúncio no banco de dados.");
     }

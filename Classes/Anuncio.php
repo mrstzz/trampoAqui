@@ -11,8 +11,6 @@ class Anuncio extends Conexao {
         $sql = "INSERT INTO anuncios (titulo, descricao, valor, localidade, comerc_id, status, categoria,criado_em) 
                 VALUES (:titulo, :descricao, :valor, :localidade, :comerc_id, :status, :categoria, :criado_em)";
 
-                pr($sql);
-        
         $params = [
             ':titulo' => $titulo,
             ':descricao' => $descricao,
@@ -43,7 +41,7 @@ class Anuncio extends Conexao {
         return $result->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function atualizarStatus_doAnuncio($id, $novoStatus) {
+    public function atualizarStatusAnuncio($id, $novoStatus) {
         $sql = "UPDATE anuncios SET status = :status WHERE id = :id LIMIT 1";
         $params = [
             ':status' => $novoStatus,
@@ -61,7 +59,7 @@ class Anuncio extends Conexao {
     public function pesquisaTodosAnuncios($carrossel = NULL) {
         $cond = ($carrossel) ? 'ORDER BY an.criado_em LIMIT 10': '';
         $sql = "SELECT 
-                    an.id as 'AnuncioID',
+                    an.id as 'anuncioID',
                     an.*,
                     aa.*,
                     c.nome as 'nomeCategoria',
@@ -80,6 +78,79 @@ class Anuncio extends Conexao {
                 $cond";
             $result = $this->consulta($sql);
             return $result->fetchAll(PDO::FETCH_OBJ);
+    }
+
+
+
+    public function pesquisaAnuncioParaContrato($id) {
+        $sql = "SELECT 
+                    a.id AS 'idAnuncio',
+                    a.*,
+                    aa.*,
+                    c.nome
+                FROM 
+                    anuncios a
+                INNER JOIN
+                    anuncios_arquivos aa ON aa.anuncio_id = a.id
+                INNER JOIN
+                    comerciantes c ON c.id = a.comerc_id 
+                WHERE 
+                    a.id = $id";
+        $result =  $this->consulta($sql);
+        return $result->fetch(PDO::FETCH_OBJ);
+    }
+
+
+    public function pesquisaAnunciosContratados($id) {
+        $sql = "SELECT 
+                    a.id AS 'idAnuncio',
+                    a.*,
+                    aa.*,
+                    ac.* 
+                FROM 
+                    anuncios_contratados ac
+                INNER JOIN
+                    anuncios a ON a.id =  ac.anuncio_id
+                INNER JOIN
+                    anuncios_arquivos aa ON aa.anuncio_id = a.id
+                WHERE 
+                    ac.cliente_id = $id";
+        $result =  $this->consulta($sql);
+        return $result->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function insereAnuncioContratado($comerc_id, $cliente_id, $status, $anuncio_id) {
+        $sql = "INSERT INTO anuncios_contratados (comerc_id, cliente_id, status, data_de_contrato, anuncio_id) 
+                VALUES (:comerc_id, :cliente_id, :status, :data_de_contrato, :anuncio_id)";
+
+        pr($sql);
+        $params = [
+            ':comerc_id' => $comerc_id,
+            ':cliente_id' => $cliente_id,
+            ':status' => $status,
+            ':data_de_contrato' => date('Y-m-d H:i:s'),
+            ':anuncio_id' => $anuncio_id
+        ];
+        pr($params);
+        $result = $this->consulta($sql, $params);
+        return $this->getInsertId($result);
+    }
+
+    public function pesquisaTodasCategorias(){
+        $sql = "SELECT * FROM categorias"; 
+
+        $result = $this->consulta($sql);
+        return $result->fetchAll(PDO::FETCH_OBJ);
+
+    }
+
+    public function buscaNomeCatRetornaID($nome){
+
+        $sql = "SELECT id FROM categorias WHERE nome LIKE '$nome'"; 
+        $result = $this->consulta($sql);
+        return $result->fetch(PDO::FETCH_OBJ);
+
+    
     }
 
 }

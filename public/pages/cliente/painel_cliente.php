@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '../../../../vendor/autoload.php';
 use Classes\Cliente;
+use Classes\Anuncio;
 
 
 session_start();
@@ -10,32 +11,11 @@ extract($_SESSION);
 $cliente = new Cliente();
 $cliente->pesquisaCliente($user_id);
 // Simulação de dados (substituir dps )
-$anunciosContratados = [
-    [
-        'id' => 1,
-        'titulo' => 'Supermercado Central',
-        'descricao' => 'As melhores ofertas da cidade, confira nossos produtos em destaque.',
-        'imagem' => 'https://via.placeholder.com/400x300/FF7F50/FFFFFF?text=Anuncio+1'
-    ],
-    [
-        'id' => 2,
-        'titulo' => 'Padaria Pão Quente',
-        'descricao' => 'Pães frescos a toda hora e o melhor café da manhã da região.',
-        'imagem' => 'https://via.placeholder.com/400x300/4682B4/FFFFFF?text=Anuncio+2'
-    ],
-    [
-        'id' => 3,
-        'titulo' => 'Açougue Bom Corte',
-        'descricao' => 'Carnes selecionadas e cortes especiais para o seu churrasco.',
-        'imagem' => 'https://via.placeholder.com/400x300/FF7F50/FFFFFF?text=Anuncio+3'
-    ],
-    [
-        'id' => 4,
-        'titulo' => 'Farmácia Saúde+',
-        'descricao' => 'Tudo em medicamentos e perfumaria com entrega grátis.',
-        'imagem' => 'https://via.placeholder.com/400x300/4682B4/FFFFFF?text=Anuncio+4'
-    ],
-];
+
+
+$anuncio = new Anuncio ();
+$anunciosContratados = $anuncio->pesquisaAnunciosContratados($user_id);
+
 
 ?>
 <!DOCTYPE html>
@@ -121,14 +101,14 @@ $anunciosContratados = [
                 <div class="relative w-full">
                     <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth carousel-track pb-4">
                         
-                        <?php foreach ($anunciosContratados as $anuncio): ?>
+                        <?php foreach ($anunciosContratados as $key => $anuncio): ?>
                         <div class="snap-center flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 p-3">
                             <div class="bg-white rounded-lg shadow-lg overflow-hidden h-full flex flex-col">
-                                <img src="<?= htmlspecialchars($anuncio['imagem']) ?>" alt="<?= htmlspecialchars($anuncio['titulo']) ?>" class="w-full h-48 object-cover">
+                                <img src="../../uploads/<?= htmlspecialchars($anuncio->caminho_arquivo) ?>" alt="<?= htmlspecialchars($anuncio->titulo) ?>" class="w-full h-48 object-cover">
                                 <div class="p-6 flex-1 flex flex-col">
-                                    <h3 class="text-xl font-semibold text-gray-800 mb-2"><?= htmlspecialchars($anuncio['titulo']) ?></h3>
-                                    <p class="text-gray-600 mb-4 flex-1"><?= htmlspecialchars($anuncio['descricao']) ?></p>
-                                    <a href="/comerciante/<?= $anuncio['id'] ?>" class="text-center bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-2"><?= htmlspecialchars($anuncio->titulo) ?></h3>
+                                    <p class="text-gray-600 mb-4 flex-1"><?= htmlspecialchars($anuncio->descricao) ?></p>
+                                    <a href="/comerciante/<?= $anuncio->idAnuncio?>" class="text-center bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">
                                         Ver Comerciante
                                     </a>
                                 </div>
