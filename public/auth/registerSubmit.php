@@ -101,7 +101,7 @@ $result = $cliente->insereCliente($nome, $email, $data_nascimento, $senha, $tele
 if ($result) {
         unset($_SESSION['old_input']); // Limpa dados antigos em caso de sucesso
         $_SESSION['success'] = 'Cadastro realizado com sucesso! Faça o login.';
-        header("Location: /pages/login.php");
+        header("Location: /pages/auth/login.php");
         exit();
 } else {
     $_SESSION['flash_error'] = $result['message'] ?? 'Erro inesperado ao cadastrar. Tente novamente.';
