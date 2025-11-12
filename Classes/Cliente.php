@@ -33,7 +33,12 @@ class Cliente extends Conexao{
         if(!empty($email)){
             $this->email = $email;
         }
-        $this->hashSenha($senha);
+
+        if (empty($criado_em)) {
+        $criado_em = date('Y-m-d H:i:s');
+        }
+
+        $senha = $this->hashSenha($senha);
 
         $sql = "INSERT INTO clientes (
             nome,
@@ -62,6 +67,7 @@ class Cliente extends Conexao{
             ':cpf' => $cpf,
             ':criado_em' => $criado_em
         ];
+
 
         try{
             $this->consulta($sql, $parametros);
@@ -143,6 +149,26 @@ class Cliente extends Conexao{
     }
 
     function pesquisaCliente ($id = FALSE, $nome = FALSE){
+
+        $sql = "SELECT * FROM clientes WHERE ";
+
+        $id = ($id) ? $sql .= "id = $id" : $sql.="nome LIKE '%$nome%'";
+
+		$res = $this->consulta($sql);
+		if ($res->rowCount() === 0) {
+			return []; 
+		}
+    
+		$dados = $res->fetch(PDO::FETCH_ASSOC);
+
+        return $dados;
+    }
+
+
+
+
+
+     function pesquisaTodosCliente($id = FALSE, $nome = FALSE){
 
         $sql = "SELECT * FROM clientes WHERE ";
 

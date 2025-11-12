@@ -7,7 +7,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
 extract($_SESSION);
-// pr($_SESSION);
 
 $painel = (@$user_type == 'comerciante') ? 'painel_comerciante.php' : 'painel_cliente.php';
 
@@ -37,9 +36,9 @@ $categorias = [
             <form class="search-bar w-full max-w-3xl flex" action="pesquisa_index.php" method="post">
                 <input type="text" name="pesquisa" placeholder="Pesquise aqui..." class="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
                 <select name="tipo" class="px-3 py-2 border-t border-b border-gray-300 bg-gray-50 focus:outline-none">
-                    <option value="anuncio">Anúncio</option>
                     <option value="comerciante">Comerciante</option>
                     <option value="cliente">Cliente</option>
+                    <option value="anuncio">Anúncio</option>
                     <option value="tags">Tags</option>
                 </select>
                 <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-r-md hover:bg-indigo-700">

@@ -13,7 +13,7 @@ use Dotenv\Dotenv;
 
 class Conexao
 {
-    private ?PDO $instancia = null;
+    private $pdo  = null;
     private ?int $insert_id = null;
 
     public function __construct()
@@ -36,7 +36,7 @@ class Conexao
                 PDO::ATTR_EMULATE_PREPARES   => false,
             ];
 
-            $this->instancia = new PDO($dsn, $db_user, $db_pass, $options);
+            $this->pdo = new PDO($dsn, $db_user, $db_pass, $options);
 
         } catch (Exception $e) {
             error_log("Falha ao carregar .env ou conectar ao DB: " . $e->getMessage());
@@ -59,7 +59,7 @@ class Conexao
         $this->insert_id = null; 
         
         try {
-            $pdo = $this->instancia;
+            $pdo = $this->pdo;
 
             $stmt = $pdo->prepare($query);
             $stmt->execute($params);
@@ -90,5 +90,13 @@ class Conexao
     public function getInsertId(): ?int
     {
         return $this->insert_id;
+    }
+
+    /**
+     * Retorna o objeto PDO. Útil para transações.
+     */
+    public function getPdo(): PDO
+    {
+        return $this->pdo;
     }
 }

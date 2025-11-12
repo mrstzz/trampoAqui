@@ -9,17 +9,13 @@ include_once './functions.php';
 use Classes\Anuncio;
 
 
-if (isset($_SESSION['flash_message'])) {
-    $message = $_SESSION['flash_message'];
-    $bgColor = ($message['type'] === 'success') 
-        ? 'bg-green-100 border-green-400 text-green-700' // Sucesso
-        : 'bg-red-100 border-red-400 text-red-700';      // Erro
-
-    echo '<div class="' . $bgColor . ' border px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline">' . htmlspecialchars($message['message']) . '</span>
-          </div>';
-    unset($_SESSION['flash_message']);
+if (isset($_SESSION['alert'])) {
+    echo '<script>
+            const flashMessage = ' . json_encode($_SESSION['alert']) . ';
+          </script>';
+    unset($_SESSION['alert']);
 }
+
 
 $categorias_destaque = [
             ['nome' => 'Construção e Reformas', 'img' => 'https://plus.unsplash.com/premium_photo-1681691423422-bcaa3eaad7e8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170', 'link' => '#'],
@@ -35,6 +31,7 @@ $anuncioModel = new Anuncio();
 $carrossel = '1';
 $anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
 
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -46,10 +43,10 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../public/assets/css/index.css">
-    
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <script src="./js/alert.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link rel="shortcut icon" href="assets/images/logo-trampo-aqui-white-new50.png" type="image/x-icon">
@@ -121,6 +118,11 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
             <div class="swiper-wrapper">
 
                 <?php foreach ($anuncios as $key => $value): ?>
+
+                    <?php 
+                        $explodeData = explode('-',$value->data_nascimento);
+                        $idade = date('Y') - $explodeData[0];
+                    ?>
                     <div class="swiper-slide h-auto p-2">
                         
                         <div class="bg-white rounded-lg shadow-xl overflow-hidden transition-transform hover:shadow-2xl hover:-translate-y-1 flex flex-col">
@@ -144,13 +146,14 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
                                             class="w-12 h-12 rounded-full ring-2 ring-orange-600 ring-offset-2" />
                                     </div>
                                     <div>
-                                        <h2 class="text-lg font-bold text-gray-900"><?= htmlspecialchars($value->nome); ?>, 22
+                                        <h2 class="text-lg font-bold text-gray-900"><?= htmlspecialchars($value->nome)?>, <?= htmlspecialchars($idade)?> 
                                         </h2>
                                         <p class="text-sm text-gray-600"><?= htmlspecialchars($value->localidade); ?></p>
                                     </div>
                                 </div>
 
-                                <h3 class="font-semibold text-gray-800">Descrição do Anúncio:</h3>
+                                <h3 class="font-semibold text-gray-800"><?= htmlspecialchars($value->titulo)?></h3>
+                                <h3 class="font-semibold text-gray-600 text-sm py-2">Descrição:</h3>
                                 <p class="text-gray-700 mb-4 text-sm h-20 overflow-y-auto">
                                     <?= htmlspecialchars($value->descricao); ?>
                                 </p>
@@ -240,8 +243,6 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
         &copy; Todos os Direitos Reservados - trampoAqui 2025
     </footer>
     <?php include_once '../partials/_chat_widget.php' ?>
-
-        
     <script>
         const swiperAnuncios = new Swiper('.anuncios-carousel', {
             slidesPerView: 1,
@@ -311,7 +312,6 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
             },
         });
     </script>
-
 
     <!-- MODAL -->
     <div id="contratar-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">

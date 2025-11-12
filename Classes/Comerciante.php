@@ -104,50 +104,35 @@ public function insereComerciante($nome, $status, $email, $data_nascimento, $sen
         }
     }
 
-    function atualizaComerciante($id) {
-        $sql = "UPDATE comerciantes SET(
-            id,
-            nome,
-            email,
-            senha,
-            telefone,
-            cpf,
-            criado_em
-        ) VALUES (
-            :nome,
-            :email,
-            :senha,
-            :telefone,
-            :cpf,
-            :criado_em
-        ) WHERE id = :id
-        ";
-
-        $arguments = ['id' => $this->id];
+    function atualizaComerciante($id, array $dados) {
         
-        try{
-            $this->consulta($sql, $arguments);
-            $insertId = $this->getInsertId();
-            return [
-                'success' => true,
-                'id' => $insertId
-            ];
-        }catch(PDOException $e){
-            return [
-                'success' => false,
-                'error' => $e->getMessage()
-            ];
-        }
+        $sql = "UPDATE comerciantes SET 
+                    nome = :nome,
+                    email = :email,
+                    telefone = :telefone
+                WHERE id = :id";
+
+        $arguments = [
+            ':nome'     => $dados['nome'],
+            ':email'    => $dados['email'],
+            ':telefone' => $dados['telefone'],
+            ':id'       => $id 
+        ];
+
+        $result = $this->consulta($sql, $arguments);
+        
+        return $result->rowCount() > 0;
     }
 
-    function pesquisaComerciante ($id = NULL, $nome = NULL){
+    function pesquisaTodosComerciantes ($id = NULL, $nome = NULL){
 
         $sql = "SELECT 
                     id,
                     status,
                     nome,
                     criado_em,
-                    telefone 
+                    telefone,
+                    email 
                 FROM Comerciantes 
                 WHERE ";
 
@@ -161,7 +146,35 @@ public function insereComerciante($nome, $status, $email, $data_nascimento, $sen
 
         return $dados;
     }
-        function buscaEmailComerciante ($email){
+
+    function pesquisaComerciante ($id = NULL, $nome = NULL){
+
+        $sql = "SELECT 
+                    id,
+                    status,
+                    nome,
+                    criado_em,
+                    telefone,
+                    email 
+                FROM Comerciantes 
+                WHERE ";
+
+        $id = ($id) ? $sql .= "id = $id" : $sql.="nome LIKE '%$nome%'";
+		$res = $this->Consulta($sql);
+
+		if ($res->rowCount() === 0) {
+			return []; 
+		}
+		$dados = $res->fetch(PDO::FETCH_ASSOC);
+
+        return $dados;
+    }
+
+
+
+
+
+    function buscaEmailComerciante ($email){
         $sql = "SELECT * FROM comerciantes WHERE email = :email LIMIT 1";
         $arguments = [':email' => $email];
 
@@ -197,7 +210,7 @@ public function insereComerciante($nome, $status, $email, $data_nascimento, $sen
     }
 
 
-    public function atualizaFotoPerfiç($comercId) {
+    public function atualizaFotoPerfil($comercId) {
         // Remove o status 'perfil' da foto antiga, se houver
         $sql = "UPDATE comerciante_fotos SET tipo = 'galeria' WHERE comerc_id = $comercId AND tipo = 'perfil'";
         $result = $this->consulta($sql);

@@ -41,11 +41,40 @@ class Anuncio extends Conexao {
         return $result->fetchAll(PDO::FETCH_OBJ);
     }
 
+
+
+    public function pesquisaAnuncioAtivo($id) {
+        $sql = "SELECT 
+                    a.id AS 'idAnuncio',
+                    a.*,
+                    aa.* 
+                FROM 
+                    anuncios a
+                INNER JOIN
+                    anuncios_arquivos aa ON aa.anuncio_id = a.id
+                WHERE 
+                    a.comerc_id = $id AND
+                    a.status = 'ativo'";
+        $result =  $this->consulta($sql);
+        return $result->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function atualizarStatusAnuncio($id, $novoStatus) {
         $sql = "UPDATE anuncios SET status = :status WHERE id = :id LIMIT 1";
         $params = [
             ':status' => $novoStatus,
             ':id' => $id
+        ];
+        return $this->consulta($sql, $params);
+    }
+
+
+    public function atualizarStatusContratado($id, $cliente_id, $novoStatus) {
+        $sql = "UPDATE anuncios_contratados SET status = :status WHERE id = :id  AND cliente_id = :cliente_id LIMIT 1";
+        $params = [
+            ':status' => $novoStatus,
+            ':id' => $id,
+            ':cliente_id' => $cliente_id
         ];
         return $this->consulta($sql, $params);
     }
@@ -64,7 +93,8 @@ class Anuncio extends Conexao {
                     aa.*,
                     c.nome as 'nomeCategoria',
                     comerc.nome,
-                    comerc.telefone
+                    comerc.telefone,
+                    comerc.data_nascimento
                 FROM 
                     anuncios an
                 INNER JOIN
@@ -106,13 +136,17 @@ class Anuncio extends Conexao {
                     a.id AS 'idAnuncio',
                     a.*,
                     aa.*,
-                    ac.* 
+                    ac.id AS 'idContrato', 
+                    ac.*,
+                    c.nome AS 'comercNome' 
                 FROM 
                     anuncios_contratados ac
                 INNER JOIN
                     anuncios a ON a.id =  ac.anuncio_id
                 INNER JOIN
                     anuncios_arquivos aa ON aa.anuncio_id = a.id
+                INNER JOIN
+                    comerciantes c ON c.id = ac.comerc_id 
                 WHERE 
                     ac.cliente_id = $id";
         $result =  $this->consulta($sql);
@@ -123,7 +157,6 @@ class Anuncio extends Conexao {
         $sql = "INSERT INTO anuncios_contratados (comerc_id, cliente_id, status, data_de_contrato, anuncio_id) 
                 VALUES (:comerc_id, :cliente_id, :status, :data_de_contrato, :anuncio_id)";
 
-        pr($sql);
         $params = [
             ':comerc_id' => $comerc_id,
             ':cliente_id' => $cliente_id,
@@ -131,7 +164,6 @@ class Anuncio extends Conexao {
             ':data_de_contrato' => date('Y-m-d H:i:s'),
             ':anuncio_id' => $anuncio_id
         ];
-        pr($params);
         $result = $this->consulta($sql, $params);
         return $this->getInsertId($result);
     }

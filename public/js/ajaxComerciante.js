@@ -77,7 +77,7 @@ function populateModal(data) {
 
 // index
 
-document.querySelector('.anuncios-carousel').addEventListener('click', function(e) {
+document.querySelector('.modal-ajax').addEventListener('click', function(e) {
     
     const contratarBtn = e.target.closest('.btn-contratar');
     

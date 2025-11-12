@@ -12,7 +12,6 @@ use Classes\Cliente;
 $cliente = new Cliente();
 $comerciante = new Comerciante();
 
-// print_r($_POST);die;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: registrar.php");
@@ -33,7 +32,6 @@ $termos = isset($_POST['terms']); // Checkbox
 $perfil = $_SESSION['perfil'] ?? '';
 $status = 'ativo';
 
-// print_r($_POST);die;
 
 // Salva dados na sessão para repopular em caso de erro (exceto senhas)
 $_SESSION['old_input'] = $_POST;

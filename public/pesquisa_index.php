@@ -16,11 +16,16 @@ extract($_GET);
 
 use Classes\Cliente;
 use Classes\Comerciante;
-
+require_once './functions.php';
 
 // Validação
 if (empty($pesquisa) || empty($tipo)) {
-    header("Location: ../index.php?msg=Termo de pesquisa ou tipo inválido!");
+
+    $_SESSION['alert'] = [
+        'type' => 'error', 
+        'message' => 'Gentileza digitar no campo de pesquisa!'
+    ];
+    header("Location: ../index.php");
     exit;
 }
 
@@ -30,15 +35,26 @@ $cliente = new Cliente();
 $comerciante = new Comerciante();
 
 if ($tipo == 'cliente') {
-    $busca = $cliente->pesquisaCliente(false, $pesquisa);
+    $url = 'perfil_cliente.php';
+    $busca = $cliente->pesquisaTodosCliente(false, $pesquisa);
 } else if ($tipo == 'comerciante') {
-    $busca = $comerciante->pesquisaComerciante(NULL, $pesquisa);
+    $url = 'perfil_comerciante.php';
+    $busca = $comerciante->pesquisaTodosComerciantes(NULL, $pesquisa);
+    
 } else if ($tipo == 'anuncio') {
-    // $anuncio = new Anuncio();
-    // $busca = $anuncio->pesquisaAnuncio(false, $pesquisa);
+    $_SESSION['alert'] = [
+        'type' => 'error', 
+        'message' => 'Ainda em desenvolvimento!'
+    ];
+    header("Location: ../index.php");
+    exit;
 } else if ($tipo == 'tags') {
-    // $tag = new Tag();
-    // $busca = $tag->pesquisaPorTag($pesquisa);
+    $_SESSION['alert'] = [
+        'type' => 'error', 
+        'message' => 'Ainda em desenvolvimento!'
+    ];
+    header("Location: ../index.php");
+    exit;
 }
 
 
@@ -97,7 +113,7 @@ if ($tipo == 'cliente') {
                         </div>
 
                         <div class="p-4 bg-gray-50 text-right">
-                            <a href="perfil.php?tipo=<?php echo htmlspecialchars($tipo)?>&id=<?php echo $item['id'] ?? ''?>" 
+                            <a href="<?=htmlspecialchars($url)?>?id=<?=htmlspecialchars($item['id'])?>" 
                                class="px-5 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 shadow-md hover:shadow-lg transition-all duration-200">
                                 Ver Perfil
                             </a>

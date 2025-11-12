@@ -9,6 +9,17 @@ unset($_SESSION['success']);
 
 $old_input = $_SESSION['old_input'] ?? [];
 unset($_SESSION['old_input']);
+
+
+if (isset($_SESSION['contrato'])) {
+
+    echo '<script>
+            const flashMessage = ' . json_encode($_SESSION['contrato']) . ';
+          </script>';
+    
+    unset($_SESSION['contrato']);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -16,12 +27,11 @@ unset($_SESSION['old_input']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>trampoAqui - Bem vindo de volta!</title>
-    
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../../assets/images/logo-trampo-aqui-white-new50.png" type="image/x-icon">
-    
+    <script src="../../js/alert.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -37,6 +47,7 @@ unset($_SESSION['old_input']);
                 }
             }
         }
+
     </script>
 </head>
 <body class="font-poppins">
@@ -116,7 +127,6 @@ unset($_SESSION['old_input']);
     <footer class="w-full bg-gray-800 text-gray-300 text-center p-8">
         &copy; Todos os Direitos Reservados - trampoAqui 2025
     </footer>
-
 
 </body>
 </html>

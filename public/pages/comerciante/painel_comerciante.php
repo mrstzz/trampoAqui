@@ -15,23 +15,18 @@ extract($_SESSION);
 
 
 
-if (isset($_SESSION['flash_message'])) {
-    $message = $_SESSION['flash_message'];
-    $bgColor = ($message['type'] === 'success') 
-        ? 'bg-green-100 border-green-400 text-green-700' // Sucesso
-        : 'bg-red-100 border-red-400 text-red-700';      // Erro
+if (isset($_SESSION['alert'])) {
 
-    echo '<div class="' . $bgColor . ' border px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline">' . htmlspecialchars($message['message']) . '</span>
-          </div>';
-    unset($_SESSION['flash_message']);
+    echo '<script>
+            const flashMessage = ' . json_encode($_SESSION['alert']) . ';
+          </script>';
+    
+    unset($_SESSION['alert']);
 }
 
 
 $comerc = new Comerciante();
-$comerc->pesquisaComerciante($user_id);
-// Simulação de dados (substitua pela sua lógica)
-
+$comerciante = $comerc->pesquisaComerciante($user_id);
 
 $anuncio = new Anuncio();
 $anunciosAtivos = $anuncio->pesquisarPeloId($user_id);
@@ -47,6 +42,9 @@ $categorias = $anuncio->pesquisaTodasCategorias();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Comerciante</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/alert.js"></script>
+    <script src="../../js/chat.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body class="bg-gray-100">
@@ -71,7 +69,7 @@ $categorias = $anuncio->pesquisaTodasCategorias();
                 </a>
                 <a href="#" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 font-medium hover:bg-orange-50 hover:text-orange-600 transition-colors" data-target="anuncios-ativos">
                     <i class="bi bi-megaphone-fill w-5"></i>
-                    <span>Seus Anúncios Ativos</span>
+                    <span>Seus Anúncios</span>
                 </a>
                 <a href="#" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 font-medium hover:bg-orange-50 hover:text-orange-600 transition-colors" data-target="chat">
                     <i class="bi bi-chat-dots-fill w-5"></i>
@@ -170,7 +168,7 @@ $categorias = $anuncio->pesquisaTodasCategorias();
             </div>
 
             <div id="content-anuncios-ativos" class="content-section hidden">
-            <h1 class="text-3xl font-bold text-gray-800 mb-6">Seus Anúncios Ativos</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Seus Anúncios</h1>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
@@ -190,23 +188,24 @@ $categorias = $anuncio->pesquisaTodasCategorias();
                                 <h3 class="text-xl font-semibold text-gray-800"><?= htmlspecialchars($anuncio->titulo) ?></h3>
                                 
                                 <?php if ($anuncio->status === 'ativo'): // Corrigido para 'ativo' minúsculo, como no seu DB ?>
-                                    <span class="text-xs font-medium bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Ativo</span>
+                                    <span class="text-xs font-bold bg-green-100 text-green-600 px-2 py-0.5 rounded-full">Ativo</span>
+                                <?php elseif( $anuncio->status === 'contratado'): ?>
+                                    <span class="text-xs font-bold bg-orange-200 text-orange-500 px-2 py-0.5 rounded-full">Contratado</span>
                                 <?php else: ?>
-                                    <span class="text-xs font-medium bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">Pendente</span>
+                                    <span class="text-xs font-bold bg-red-100 text-red-600 px-2 py-0.5 rounded-full">Desativado</span>
                                 <?php endif; ?>
                             </div>
                             
                             <p class="text-gray-600 mb-4">Descrição: <?= htmlspecialchars($anuncio->descricao) ?></p>
                                 <h1 class="text-xl font-semibold py-3  text-gray-800">Valor: R$<?= htmlspecialchars($anuncio->valor) ?></h1>
 
-                            
-                            <div class="flex space-x-2">
+                            <div class="flex justify-end space-x-2">
                                 
-                                <a href="/anuncio/editar/<?= $anuncio->idAnuncio ?>" class="text-center w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">
+                                <a href="/anuncio/editar/<?= $anuncio->idAnuncio ?>" class="text-blue-600 border border-blue-600 w-right text-center font-semibold py-2 px-4 rounded-lg hover:bg-blue-500 hover:text-white transition-colors">
                                     Editar
                                 </a>
-                                <a href="/anuncio/excluir/<?= $anuncio->idAnuncio ?>" class="text-center w-full bg-orange-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 transition-colors">
-                                    Excluir
+                                <a href="./cad_painel_comerciante.php?desativar=1&anuncio_id=<?= $anuncio->idAnuncio ?>" class=" w-right  text-center text-red-600 border border-red-600 font-semibold py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white transition-colors">
+                                    Desativar
                                 </a>
                             </div>
                         </div>
@@ -228,8 +227,40 @@ $categorias = $anuncio->pesquisaTodasCategorias();
 
             <div id="content-chat" class="content-section hidden">
                 <h1 class="text-3xl font-bold text-gray-800 mb-6">Chat</h1>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <p class="text-gray-700">Ainda em Desenvolvimento.</p>
+                
+                <div class="flex bg-white rounded-lg shadow-md" style="height: 70vh;">
+                    
+                    <div class="w-1/3 border-r border-gray-200 overflow-y-auto" id="chat-list-container">
+                        <div class="p-4 text-center text-gray-500">Carregando conversas...</div>
+                    </div>
+
+                    <div class="w-2/3 flex flex-col" id="chat-window">
+                        
+                        <div class="p-4 border-b border-gray-200">
+                            <h2 id="chat-header-name" class="text-lg font-semibold text-gray-700">Selecione uma conversa</h2>
+                        </div>
+
+                        <div class="flex-1 p-4 space-y-4 overflow-y-auto bg-gray-50" id="chat-history">
+                            <div class="text-center text-gray-400" id="chat-placeholder">
+                                Selecione uma conversa ao lado para começar.
+                            </div>
+                        </div>
+
+                        <div class="p-4 border-t border-gray-200 bg-white">
+                            <form id="chat-send-form" class="flex space-x-3">
+                                <input type="hidden" id="chat-conversation-id" name="conversation_id" value="">
+                                
+                                <input type="text" id="chat-message-input" name="message_text" 
+                                    placeholder="Digite sua mensagem..." 
+                                    class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" disabled>
+                                
+                                <button type="submit" id="chat-send-button"
+                                        class="bg-orange-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50" disabled>
+                                    <i class="bi bi-send-fill"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -237,20 +268,21 @@ $categorias = $anuncio->pesquisaTodasCategorias();
                 <h1 class="text-3xl font-bold text-gray-800 mb-6">Configurações do Comerciante</h1>
                 
                 <div class="bg-white p-8 rounded-lg shadow-md max-w-2xl">
-                    <form action="/comerciante/atualizar" method="POST" class="space-y-6">
+                    <form action="./cad_painel_comerciante.php" method="POST" class="space-y-6">
+                        <input type="hidden" name="config" value="1">
                         <div>
-                            <label for="nome_fantasia" class="block text-sm font-medium text-gray-700 mb-1">Nome Fantasia</label>
-                            <input type="text" id="nome_fantasia" name="nome_fantasia" value="[Nome Fantasia]" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <label for="nome_config" class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+                            <input type="text" id="nome_config" name="nome_config" value="<?=htmlspecialchars($comerciante['nome']) ?>" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                         </div>
                         
                         <div>
-                            <label for="email_contato" class="block text-sm font-medium text-gray-700 mb-1">Email de Contato</label>
-                            <input type="email" id="email_contato" name="email_contato" value="[contato@comerciante.com]" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <label for="email_config" class="block text-sm font-medium text-gray-700 mb-1">Email de Contato</label>
+                            <input type="email" id="email_config" name="email_config" value="<?=htmlspecialchars($comerciante['email']) ?>" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                         </div>
 
                         <div>
-                            <label for="endereco" class="block text-sm font-medium text-gray-700 mb-1">Endereço</label>
-                            <input type="text" id="endereco" name="endereco" value="[Endereço do Comerciante]" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <label for="telefone_config" class="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
+                            <input type="number" id="telefone_config" name="telefone_config" value="<?=htmlspecialchars($comerciante['telefone'])?>" maxlength="11" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                         </div>
                         
                         <div class="text-right">
