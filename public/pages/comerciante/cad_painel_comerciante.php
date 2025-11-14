@@ -124,7 +124,37 @@ $paginaDeRetorno = "./painel_comerciante.php";
             }
             else {throw new Exception("Não conseguimos desativar esse anuncio. Gentileza tentar novamente mais tarde!");}
 
+        }else if (@$ativar) {
+
+            $ativaAnuncio = $anuncioArq->atualizarStatusAnuncio ($anuncio_id,'ativo');
+
+            if ($ativaAnuncio) {
+
+                $_SESSION['alert'] = [
+                        'type' => 'success',
+                        'message' => 'Anuncio ativado!'
+                    ];
+                    header("Location: $paginaDeRetorno");
+                    exit;
+            }
+            else {throw new Exception("Não conseguimos ativar esse anuncio. Gentileza tentar novamente mais tarde!");}
+
+        }else if ($editar) {
+
+
+            print_r('a'); die;
+
+            $anuncioDados = $anuncioArq->pesquisaAnuncioPorId($id);
+
+            header('Content-Type: application/json');
+            echo json_encode($anuncioDados);
+            exit;
+
+        } else {
+            throw new Exception("Ação inválida ou não especificada.");
         }
+
+
     } catch (Exception $e) {
 
         // Se a transação foi iniciada, desfaz

@@ -191,6 +191,10 @@ $categorias = $anuncio->pesquisaTodasCategorias();
                                     <span class="text-xs font-bold bg-green-100 text-green-600 px-2 py-0.5 rounded-full">Ativo</span>
                                 <?php elseif( $anuncio->status === 'contratado'): ?>
                                     <span class="text-xs font-bold bg-orange-200 text-orange-500 px-2 py-0.5 rounded-full">Contratado</span>
+                                <?php elseif ($anuncio->status === 'concluido'): ?>
+                                    <span class="text-xs font-bold bg-orange-100 text-orange-400 px-2 py-0.5 rounded-full">Concluído </span>
+                                <?php elseif ($anuncio->status === 'desativado'): ?>
+                                    <span class="text-xs font-bold bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Desativado</span>
                                 <?php else: ?>
                                     <span class="text-xs font-bold bg-red-100 text-red-600 px-2 py-0.5 rounded-full">Desativado</span>
                                 <?php endif; ?>
@@ -201,13 +205,22 @@ $categorias = $anuncio->pesquisaTodasCategorias();
 
                             <div class="flex justify-end space-x-2">
                                 
-                                <a href="/anuncio/editar/<?= $anuncio->idAnuncio ?>" class="text-blue-600 border border-blue-600 w-right text-center font-semibold py-2 px-4 rounded-lg hover:bg-blue-500 hover:text-white transition-colors">
-                                    Editar
+                                <?php if ($anuncio->status == 'desativado'): ?>
+                                    
+                                <a href="./cad_painel_comerciante.php?ativar=1&anuncio_id=<?= $anuncio->idAnuncio ?>" class=" w-right  text-center text-green-600 border border-green-600 font-semibold py-2 px-4 rounded-lg hover:bg-green-500 hover:text-white transition-colors">
+                                    Ativar
                                 </a>
+                                <?php else: ?>
                                 <a href="./cad_painel_comerciante.php?desativar=1&anuncio_id=<?= $anuncio->idAnuncio ?>" class=" w-right  text-center text-red-600 border border-red-600 font-semibold py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white transition-colors">
                                     Desativar
                                 </a>
+                                <?php endif; ?>
                             </div>
+
+
+
+
+
                         </div>
                     </div>
                     
@@ -335,6 +348,26 @@ $categorias = $anuncio->pesquisaTodasCategorias();
             });
         });
     </script>
+
+
+<!-- <div id="modal-edita" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg mx-4 p-6 relative">
+            
+            <button id="modal-close-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <h2 class="text-2xl font-bold mb-4 text-gray-800" id="modal-title">Detalhes do Anúncio</h2>
+            
+            <div id="modal-content-area">
+                <p class="text-center text-gray-600 py-8">Carregando...</p>
+            </div>
+        </div>
+    </div>
+    <script src="../../js/ajaxEdita.js"></script> -->
+
+
 
 </body>
 </html>

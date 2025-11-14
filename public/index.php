@@ -5,7 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 include_once '../vendor/autoload.php';
-include_once './functions.php';
 use Classes\Anuncio;
 
 
@@ -73,7 +72,7 @@ $anuncios = $anuncioModel->pesquisaTodosAnuncios($carrossel);
             <div class="bg-indigo-700 bg-opacity-70 rounded-lg p-8">
                 <h1 class="text-4xl font-bold mb-4">Encontre o profissional certo para sua demanda!</h1>
                 <p class="text-lg mb-8">De reformas a aulas particulares, conectamos você aos melhores prestadores.</p>
-                <a href="#" class="bg-white text-indigo-700 font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-100 transition duration-300">
+                <a href="pages/auth/login.php" class="bg-white text-indigo-700 font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-100 transition duration-300">
                     Comece a Buscar
                 </a>
             </div>

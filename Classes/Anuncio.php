@@ -2,6 +2,7 @@
 namespace Classes;
 use PDO;
 
+
 class Anuncio extends Conexao {
     public function __construct() {
         parent::__construct();
